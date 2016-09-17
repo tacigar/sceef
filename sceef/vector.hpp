@@ -18,7 +18,30 @@ class Vector
     using ContainerType = std::array<T, N>;
     
   public:
-    
+    Vector()
+            : storage_()
+    {
+    }
+
+    Vector(std::initializer_list<T> initList)
+            : storage_()
+    {
+        auto minSize = std::min(static_cast<int>(initList.size()), N);
+        auto itr = std::begin(initList);
+
+        for (int i = 0; i < minSize; i++, itr++) {
+            storage_[i] = *itr;
+        }
+    }
+
+    template <class Expression>
+    Vector(const sceef::VectorExpression<Expression>& expression)
+            : storage_()
+    {
+        for (int i = 0; i < N; i++) {
+            storage_[i] = expression[i];
+        }
+    }
 
   private:
     ContainerType storage_;
