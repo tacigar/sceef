@@ -8,7 +8,25 @@
 
 namespace sceef {
 
+template <class Derived>
+class VectorExpression {
+  public:
+    auto operator [] (int index) -> decltype(auto) {
+        return (static_cast<Derived&>(*this))[index];
+    }
 
+    auto operator [] (int index) const -> decltype(auto) {
+        return (static_cast<Derived const&>(*this))[index];
+    }
+
+    auto operator () () -> decltype(auto) {
+        return static_cast<E&>(*this);
+    }
+
+    auto operator () () const -> decltype(auto) {
+        return static_cast<E const&>(*this);
+    }
+};
 
 } 
 
