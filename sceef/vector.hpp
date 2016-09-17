@@ -12,7 +12,7 @@ namespace sceef {
 
 template <class T, class N>
 class Vector
-        : public sceef::VectorExpression<sceef::Vector<T, N> >
+        : public VectorExpression<Vector<T, N> >
 {
   private:
     using ContainerType = std::array<T, N>;
@@ -35,7 +35,7 @@ class Vector
     }
 
     template <class Expression>
-    Vector(const sceef::VectorExpression<Expression>& expression)
+    Vector(const VectorExpression<Expression>& expression)
             : storage_()
     {
         for (int i = 0; i < N; i++) {
@@ -50,6 +50,47 @@ class Vector
     const T& operator [] (int index) const {
         return storage_[index];
     }
+
+    template <class Expression>
+    Vector<T, N>& operator = (const VectorExpression<Expression>& expression) {
+        for (int i = 0; i < N; i++) {
+            storage_[i] = expression[i];
+        }
+        return *this;
+    }
+
+    template <class Expression>
+    Vector<T, N>& operator += (const VectorExpression<Expression>& expression) {
+        for (int i = 0; i < N; i++) {
+            storage_[i] += expression[i];
+        }
+        return *this;
+    }
+
+    template <class Expression>
+    Vector<T, N>& operator -= (const VectorExpression<Expression>& expression) {
+        for (int i = 0; i < N; i++) {
+            storage_[i] -= expression[i];
+        }
+        return *this;
+    }
+
+    template <class Expression>
+    Vector<T, N>& operator *= (const VectorExpression<Expression>& expression) {
+        for (int i = 0; i < N; i++) {
+            storage_[i] *= expression[i];
+        }
+        return *this;
+    }
+
+    template <class Expression>
+    Vector<T, N>& operator /= (const VectorExpression<Expression>& expression) {
+        for (int i = 0; i < N; i++) {
+            storage_[i] /= expression[i];
+        }
+        return *this;
+    }
+    
     
   private:
     ContainerType storage_;
