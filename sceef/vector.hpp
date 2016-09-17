@@ -43,6 +43,14 @@ class Vector
         }
     }
 
+    T& operator [] (int index) {
+        return storage_[index];
+    }
+
+    const T& operator [] (int index) const {
+        return storage_[index];
+    }
+    
   private:
     ContainerType storage_;
 };
