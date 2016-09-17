@@ -91,7 +91,6 @@ class Vector
         return *this;
     }
     
-    
   private:
     ContainerType storage_;
 };
