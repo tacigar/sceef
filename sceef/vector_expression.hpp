@@ -20,11 +20,11 @@ class VectorExpression {
     }
 
     auto operator () () -> decltype(auto) {
-        return static_cast<E&>(*this);
+        return static_cast<Derived&>(*this);
     }
 
     auto operator () () const -> decltype(auto) {
-        return static_cast<E const&>(*this);
+        return static_cast<Derived const&>(*this);
     }
 };
 
