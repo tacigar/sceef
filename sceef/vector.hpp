@@ -6,13 +6,22 @@
 #ifndef SCEEF_VECTOR_HPP
 #define SCEEF_VECTOR_HPP
 
+#include <array>
+
 namespace sceef {
 
 template <class T, class N>
-class vector
-        : public sceef::vector_expression<vector<T, N> >
+class Vector
+        : public sceef::VectorExpression<sceef::Vector<T, N> >
 {
+  private:
+    using ContainerType = std::array<T, N>;
+    
+  public:
+    
 
+  private:
+    ContainerType storage_;
 };
 
 } 
