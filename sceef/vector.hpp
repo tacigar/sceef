@@ -10,13 +10,16 @@
 
 namespace sceef {
 
-template <class T, class N>
+template <class T, int N>
 class Vector
         : public VectorExpression<Vector<T, N> >
 {
+  public:
+    constexpr int SIZE = N;
+    
   private:
     using ContainerType = std::array<T, N>;
-    
+
   public:
     Vector()
             : storage_()
