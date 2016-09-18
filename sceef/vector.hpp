@@ -17,7 +17,7 @@ class Vector
         : public VectorExpression<Vector<T, N> >
 {
   public:
-    constexpr int SIZE = N;
+    static constexpr int SIZE = N;
     
   private:
     using ContainerType = std::array<T, N>;

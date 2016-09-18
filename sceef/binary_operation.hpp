@@ -6,6 +6,7 @@
 #ifndef SCEEF_BINARY_OPERATION_HPP
 #define SCEEF_BINARY_OPERATION_HPP
 
+#include <sceef/utility.hpp>
 #include <sceef/vector_expression.hpp>
 
 namespace sceef {
@@ -17,7 +18,7 @@ class VectorBinaryOperation
   public:
     static_assert(Lhs::SIZE == Rhs::SIZE, "error : left size and right size are different");
 
-    constexpr int SIZE = Lhs::SIZE;
+    static constexpr int SIZE = Lhs::SIZE;
     
   public:
     VectorBinaryOperation(const Lhs& lhs, const Rhs& rhs)

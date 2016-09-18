@@ -11,7 +11,7 @@ namespace sceef {
 template <class Derived>
 class VectorExpression {
   public:
-    constexpr int SIZE = Derived::SIZE;
+    static constexpr int SIZE = Derived::SIZE;
     
   public:
     auto operator [] (int index) -> decltype(auto) {

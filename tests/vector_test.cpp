@@ -6,12 +6,13 @@
 #include <sceef/binary_operation.hpp>
 
 TEST(VectorTest, VectorSizeTest) {
-    std::vector<std::pair<sceef::Vector>, int> tests = {
-        {sceef::Vector<int, 3>(), 3},
-        {sceef::Vector<int, 5>(), 5},
-    }
+    std::vector<std::pair<int, int> > tests = {
+        {sceef::Vector<int, 3>::SIZE, 3},
+        {sceef::Vector<int, 10>::SIZE, 10},
+        {sceef::Vector<double, 100>::SIZE, 100},
+    };
     for (const auto& test : tests) {
-        EXPECT_EQ(test.first.SIZE, test.second);
+        ASSERT_EQ(test.first, test.second);
     }
 }
 
