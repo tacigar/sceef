@@ -6,17 +6,22 @@
 #ifndef SCEEF_VECTOR_HPP
 #define SCEEF_VECTOR_HPP
 
+#include <sceef/vector_expression.hpp>
+#include <algorithm>
 #include <array>
 
 namespace sceef {
 
-template <class T, class N>
+template <class T, int N>
 class Vector
         : public VectorExpression<Vector<T, N> >
 {
+  public:
+    static constexpr int SIZE = N;
+    
   private:
     using ContainerType = std::array<T, N>;
-    
+
   public:
     Vector()
             : storage_()
@@ -91,11 +96,10 @@ class Vector
         return *this;
     }
     
-    
   private:
     ContainerType storage_;
 };
 
-} 
+} // namespace sceef
 
 #endif // SCEEF_VECTOR_HPP
