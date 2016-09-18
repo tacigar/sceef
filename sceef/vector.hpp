@@ -6,6 +6,8 @@
 #ifndef SCEEF_VECTOR_HPP
 #define SCEEF_VECTOR_HPP
 
+#include <sceef/vector_expression.hpp>
+#include <algorithm>
 #include <array>
 
 namespace sceef {
@@ -98,6 +100,6 @@ class Vector
     ContainerType storage_;
 };
 
-} 
+} // namespace sceef
 
 #endif // SCEEF_VECTOR_HPP

@@ -6,6 +6,8 @@
 #ifndef SCEEF_BINARY_OPERATION_HPP
 #define SCEEF_BINARY_OPERATION_HPP
 
+#include <sceef/vector_expression.hpp>
+
 namespace sceef {
 
 template <class Lhs, class Operator, class Rhs>
@@ -53,7 +55,6 @@ auto operator / (const VectorExpression<Lhs>& lhs, const VectorExpression<Rhs>& 
     return VectorBinaryOperation<Lhs, Divide, Rhs>(lhs(), rhs());
 }
 
-
-} 
+} // namespace sceef
 
 #endif // SCEEF_BINARY_OPERATION_HPP

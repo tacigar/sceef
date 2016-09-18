@@ -11,6 +11,9 @@ namespace sceef {
 template <class Derived>
 class VectorExpression {
   public:
+    constexpr int SIZE = Derived::SIZE;
+    
+  public:
     auto operator [] (int index) -> decltype(auto) {
         return (static_cast<Derived&>(*this))[index];
     }
@@ -28,6 +31,6 @@ class VectorExpression {
     }
 };
 
-} 
+} // namespace sceef
 
 #endif // SCEEF_VECTOR_EXPRESSION_HPP
