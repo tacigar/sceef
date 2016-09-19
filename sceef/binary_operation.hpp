@@ -75,8 +75,8 @@ class MatrixBinaryOperation
     {
     }
 
-    auto operator [] (int index) const -> decltype(auto) {
-        
+    auto at(int i, int j) const -> decltype(auto) {
+        return Operator::apply(lhs_.at(i, j), rhs_.at(i, j));
     }
     
   private:

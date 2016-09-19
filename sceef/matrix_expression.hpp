@@ -15,12 +15,12 @@ class MatrixExpression {
     static constexpr int COLUMN_SIZE = Derived::COLUMN_SIZE;
     
   public:
-    auto operator [] (int index) -> decltype(auto) {
-        return (static_cast<Derived&>(*this))[index];
+    auto at(int i, int j) -> decltype(auto) {
+        return (static_cast<Derived&>(*this)).at(i, j);
     }
 
-    auto operator [] (int index) const -> decltype(auto) {
-        return (static_cast<const Derived&>(*this))[index];
+    auto at(int i, int j) const -> decltype(auto) {
+        return (static_cast<const Derived&>(*this)).at(i, j);
     }
 
     auto operator () () -> decltype(auto) {

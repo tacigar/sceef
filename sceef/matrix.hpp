@@ -48,11 +48,19 @@ class Matrix
         return storage_[index];
     }
 
+    T& at(int i, int j) {
+        return storage_[i][j];
+    }
+
+    const T& at(int i, int j) const {
+        return storage_[i][j];
+    }
+    
     template <class Expression>
     auto operator = (const MatrixExpression<Expression>& expression) -> decltype(auto) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                storage_[i][j] = expression[i][j];
+                storage_[i][j] = expression.at(i, j);
             }
         }
         return *this;
@@ -62,7 +70,7 @@ class Matrix
     auto operator += (const MatrixExpression<Expression>& expression) -> decltype(auto) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                storage_[i][j] += expression[i][j];
+                storage_[i][j] += expression.at(i, j);
             }
         }
         return *this;
@@ -72,7 +80,7 @@ class Matrix
     auto operator -= (const MatrixExpression<Expression>& expression) -> decltype(auto) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                storage_[i][j] -= expression[i][j];
+                storage_[i][j] -= expression.at(i, j);
             }
         }
         return *this;
@@ -82,7 +90,7 @@ class Matrix
     auto operator *= (const MatrixExpression<Expression>& expression) -> decltype(auto) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                storage_[i][j] *= expression[i][j];
+                storage_[i][j] *= expression.at(i, j);
             }
         }
         return *this;
@@ -92,7 +100,7 @@ class Matrix
     auto operator /= (const MatrixExpression<Expression>& expression) -> decltype(auto) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                storage_[i][j] /= expression[i][j];
+                storage_[i][j] /= expression.at(i, j);
             }
         }
         return *this;
