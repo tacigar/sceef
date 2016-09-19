@@ -56,6 +56,14 @@ class Vector
         return storage_[index];
     }
 
+    T& at(int index) {
+        return storage_[index];
+    }
+
+    const T& at(int index) const {
+        return storage_[index];
+    }
+
     template <class Expression>
     Vector<T, N>& operator = (const VectorExpression<Expression>& expression) {
         for (int i = 0; i < N; i++) {
