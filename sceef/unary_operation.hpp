@@ -29,6 +29,17 @@ class VectorUnaryOperation
     const Operand& operand_;
 };
 
+
+template <class Operand>
+auto operator + (const VectorExpression<Operand>& operand) {
+    return VectorUnaryOperation<Positive, Operand>(operand());
+}
+
+template <class Operand>
+auto operator - (const VectorExpression<Operand>& operand) {
+    return VectorUnaryOperation<Negative, Operand>(operand());
+}
+
 } // namespace sceef
 
 #endif // SCEEF_UNARY_OPERATION_HPP
