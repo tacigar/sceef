@@ -56,6 +56,34 @@ auto operator / (const VectorExpression<Lhs>& lhs, const VectorExpression<Rhs>& 
     return VectorBinaryOperation<Lhs, Divide, Rhs>(lhs(), rhs());
 }
 
+// ============================================================
+
+template <class Lhs, class Operator, class Rhs>
+class MatrixBinaryOperation
+        : public MatrixExpression<MatrixBinaryOperation<Lhs, Operator, Rhs> >
+{
+  public:
+    static_assert(Lhs::ROW_SIZE == Rhs::ROW_SIZE, "error : left row size and right row size are different");
+    static_assert(Lhs::COLUMN_SIZE == Rhs::COLUMN_SIZE, "error : left col size and right col size are different");
+
+    static constexpr int ROW_SIZE = Lhs::ROW_SIZE;
+    static constexpr int COLUMN_SIZE = Lhs::COLUMN_SIZE;
+
+  public:
+    MatrixBinaryOperation(const Lhs& lhs, const Rhs& rhs)
+            : lhs_(lhs), rhs_(rhs)
+    {
+    }
+
+    auto operator [] (int index) const -> decltype(auto) {
+        
+    }
+    
+  private:
+    const Lhs& lhs_;
+    const Rhs& rhs_;
+};
+
 } // namespace sceef
 
 #endif // SCEEF_BINARY_OPERATION_HPP
