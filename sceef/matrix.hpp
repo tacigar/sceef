@@ -12,6 +12,10 @@ template <class T, int N, int M>
 class Matrix
         : public MatrixExpression<Matrix<T, N, M> >
 {
+  public:
+    static constexpr int ROW_SIZE = M;
+    static constexpr int COLUMN_SIZE = N;
+    
   private:
     using RowType = std::array<T, M>;
     using StorageType = std::array<RowType, N>;

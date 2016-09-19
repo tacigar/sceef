@@ -8,6 +8,30 @@
 
 namespace sceef {
 
+template <class Derived>
+class MatrixExpression {
+  public:
+    static constexpr int ROW_SIZE = Derived::ROW_SIZE;
+    static constexpr int COLUMN_SIZE = Derived::COLUMN_SIZE;
+    
+  public:
+    auto operator [] (int index) -> decltype(auto) {
+        return (static_cast<E&>(*this))[index];
+    }
+
+    auto operator [] (int index) const -> decltype(auto) {
+        return (static_cast<const E&>(*this))[index];
+    }
+
+    auto operator () () -> decltype(auto) {
+        return static_cast<E&>(*this);
+    }
+
+    auto operator () () const -> decltype(auto) {
+        return static_cast<const E&>(*this);
+    }
+};
+
 } // namespace sceef
 
 #endif // SCEEF_MATRIX_EXPRESSION_HPP
