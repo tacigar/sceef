@@ -29,13 +29,29 @@ class Matrix
     {
     }
 
+    Matrix(std::initializer_list<std::initializer_list<T> > initList)
+            : storage_()
+    {
+        auto minColSize = std::min(static_cast<int>(initList.size()), N);
+        auto itrCol = std::begin(initList);
+
+        for (int i = 0; i < minColSize; i++, itrCol++) {
+            auto minRowSize = std::min(static_cast<int>(itrCol->size()), M);
+            auto itrRow = std::begin(*itrCol);
+
+            for (int j = 0; j < minRowSize; j++, itrRow++) {
+                storage_[i][j] = expression.at(i, j);
+            }
+        }
+    }
+    
     template <class Expression>
     Matrix(const MatrixExpression<Expression>& expression)
             : storage_()
     {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                storage_[i][j] = expression[i][j];
+                storage_[i][j] = expression.at(i, j);
             }
         }
     }
