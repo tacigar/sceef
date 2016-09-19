@@ -84,6 +84,26 @@ class MatrixBinaryOperation
     const Rhs& rhs_;
 };
 
+template <class Lhs, class Rhs>
+auto operator + (const MatrixExpression<Lhs>& lhs, const MatrixExpression<Rhs>& rhs) -> decltype(auto) {
+    return MatrixBinaryOperation<Lhs, Add, Rhs>(lhs(), rhs());
+}
+
+template <class Lhs, class Rhs>
+auto operator - (const MatrixExpression<Lhs>& lhs, const MatrixExpression<Rhs>& rhs) -> decltype(auto) {
+    return MatrixBinaryOperation<Lhs, Subtract, Rhs>(lhs(), rhs());
+}
+
+template <class Lhs, class Rhs>
+auto operator * (const MatrixExpression<Lhs>& lhs, const MatrixExpression<Rhs>& rhs) -> decltype(auto) {
+    return MatrixBinaryOperation<Lhs, Multiply, Rhs>(lhs(), rhs());
+}
+
+template <class Lhs, class Rhs>
+auto operator / (const MatrixExpression<Lhs>& lhs, const MatrixExpression<Rhs>& rhs) -> decltype(auto) {
+    return MatrixBinaryOperation<Lhs, Divide, Rhs>(lhs(), rhs());
+}
+
 } // namespace sceef
 
 #endif // SCEEF_BINARY_OPERATION_HPP
