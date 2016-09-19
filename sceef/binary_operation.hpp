@@ -36,7 +36,6 @@ class VectorBinaryOperation
     const Rhs& rhs_;
 };
 
-
 template <class Lhs, class Rhs>
 auto operator + (const VectorExpression<Lhs>& lhs, const VectorExpression<Rhs>& rhs) -> decltype(auto) {
     return VectorBinaryOperation<Lhs, Add, Rhs>(lhs(), rhs());
