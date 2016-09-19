@@ -40,7 +40,7 @@ class Matrix
             auto itrRow = std::begin(*itrCol);
 
             for (int j = 0; j < minRowSize; j++, itrRow++) {
-                storage_[i][j] = expression.at(i, j);
+                storage_[i][j] = *itrRow;
             }
         }
     }
