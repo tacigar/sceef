@@ -65,7 +65,7 @@ class Vector
     }
 
     template <class Expression>
-    Vector<T, N>& operator = (const VectorExpression<Expression>& expression) {
+    auto operator = (const VectorExpression<Expression>& expression) -> decltype(auto) {
         for (int i = 0; i < N; i++) {
             storage_[i] = expression.at(i);
         }
@@ -73,7 +73,7 @@ class Vector
     }
 
     template <class Expression>
-    Vector<T, N>& operator += (const VectorExpression<Expression>& expression) {
+    auto operator += (const VectorExpression<Expression>& expression) -> decltype(auto) {
         for (int i = 0; i < N; i++) {
             storage_[i] += expression.at(i);
         }
@@ -81,7 +81,7 @@ class Vector
     }
 
     template <class Expression>
-    Vector<T, N>& operator -= (const VectorExpression<Expression>& expression) {
+    auto operator -= (const VectorExpression<Expression>& expression) -> decltype(auto) {
         for (int i = 0; i < N; i++) {
             storage_[i] -= expression.at(i);
         }
@@ -89,7 +89,7 @@ class Vector
     }
 
     template <class Expression>
-    Vector<T, N>& operator *= (const VectorExpression<Expression>& expression) {
+    auto operator *= (const VectorExpression<Expression>& expression) -> decltype(auto) {
         for (int i = 0; i < N; i++) {
             storage_[i] *= expression.at(i);
         }
@@ -97,7 +97,7 @@ class Vector
     }
 
     template <class Expression>
-    Vector<T, N>& operator /= (const VectorExpression<Expression>& expression) {
+    auto operator /= (const VectorExpression<Expression>& expression) -> decltype(auto) {
         for (int i = 0; i < N; i++) {
             storage_[i] /= expression.at(i);
         }
