@@ -8,6 +8,27 @@
 
 namespace sceef {
 
+template <class Operator, class Operand>
+class VectorUnaryOperation
+        : public VectorExpression<VectorUnaryOperation<Operator, Operand> >
+{
+  public:
+    static constexpr int SIZE = Operand::SIZE;
+
+  public:
+    VectorUnaryOperation(const Operand& operand)
+            : operand_(operand)
+    {
+    }
+
+    auto operator [] (int index) const -> decltype(auto) {
+        return Operator::apply(operand_[index]);
+    }
+
+  private:
+    const Operand& operand_;
+};
+
 } // namespace sceef
 
 #endif // SCEEF_UNARY_OPERATION_HPP
