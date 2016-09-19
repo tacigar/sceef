@@ -9,4 +9,27 @@
 #include <sceef/matrix.hpp>
 #include <sceef/matrix_expression.hpp>
 
+TEST(MatrixTest, MatrixAccessTest) {
+    struct TestCase {
+        std::vector<std::vector<int> > in;
+    };
 
+    std::vector<TestCase> tests = {
+        {{1, 2}, {2, 3}, {4, 5}},
+    };
+
+    for (const auto& test : tests) {
+        sceef::Matrix<int, 3, 2> mat;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 2; j++) {
+                mat[i][j] = test[i][j];
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 2; j++) {
+                ASSERT_EQ(mat[i][j], test[i][j]);
+            }
+        }
+    }
+}
