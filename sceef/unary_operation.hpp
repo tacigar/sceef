@@ -22,7 +22,7 @@ class VectorUnaryOperation
     }
 
     auto operator [] (int index) const -> decltype(auto) {
-        return Operator::apply(operand_[index]);
+        return Operator::apply(operand_.at(index));
     }
 
   private:

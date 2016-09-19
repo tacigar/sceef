@@ -14,12 +14,12 @@ class VectorExpression {
     static constexpr int SIZE = Derived::SIZE;
     
   public:
-    auto operator [] (int index) -> decltype(auto) {
-        return (static_cast<Derived&>(*this))[index];
+    auto at(int index) -> decltype(auto) {
+        return (static_cast<Derived&>(*this)).at(index);
     }
 
-    auto operator [] (int index) const -> decltype(auto) {
-        return (static_cast<Derived const&>(*this))[index];
+    auto at(int index) const -> decltype(auto) {
+        return (static_cast<Derived const&>(*this)).at(index);
     }
 
     auto operator () () -> decltype(auto) {

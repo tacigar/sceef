@@ -44,7 +44,7 @@ class Vector
             : storage_()
     {
         for (int i = 0; i < N; i++) {
-            storage_[i] = expression[i];
+            storage_[i] = expression.at(i);
         }
     }
 
@@ -67,7 +67,7 @@ class Vector
     template <class Expression>
     Vector<T, N>& operator = (const VectorExpression<Expression>& expression) {
         for (int i = 0; i < N; i++) {
-            storage_[i] = expression[i];
+            storage_[i] = expression.at(i);
         }
         return *this;
     }
@@ -75,7 +75,7 @@ class Vector
     template <class Expression>
     Vector<T, N>& operator += (const VectorExpression<Expression>& expression) {
         for (int i = 0; i < N; i++) {
-            storage_[i] += expression[i];
+            storage_[i] += expression.at(i);
         }
         return *this;
     }
@@ -83,7 +83,7 @@ class Vector
     template <class Expression>
     Vector<T, N>& operator -= (const VectorExpression<Expression>& expression) {
         for (int i = 0; i < N; i++) {
-            storage_[i] -= expression[i];
+            storage_[i] -= expression.at(i);
         }
         return *this;
     }
@@ -91,7 +91,7 @@ class Vector
     template <class Expression>
     Vector<T, N>& operator *= (const VectorExpression<Expression>& expression) {
         for (int i = 0; i < N; i++) {
-            storage_[i] *= expression[i];
+            storage_[i] *= expression.at(i);
         }
         return *this;
     }
@@ -99,7 +99,7 @@ class Vector
     template <class Expression>
     Vector<T, N>& operator /= (const VectorExpression<Expression>& expression) {
         for (int i = 0; i < N; i++) {
-            storage_[i] /= expression[i];
+            storage_[i] /= expression.at(i);
         }
         return *this;
     }

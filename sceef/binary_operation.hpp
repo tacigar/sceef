@@ -28,7 +28,7 @@ class VectorBinaryOperation
     }
 
     auto operator [] (int index) const -> decltype(auto) {
-        return Operator::apply(lhs_[index], rhs_[index]);
+        return Operator::apply(lhs_.at(index), rhs_.at(index));
     }
     
   private:
