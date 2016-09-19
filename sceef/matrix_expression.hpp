@@ -16,19 +16,19 @@ class MatrixExpression {
     
   public:
     auto operator [] (int index) -> decltype(auto) {
-        return (static_cast<E&>(*this))[index];
+        return (static_cast<Derived&>(*this))[index];
     }
 
     auto operator [] (int index) const -> decltype(auto) {
-        return (static_cast<const E&>(*this))[index];
+        return (static_cast<const Derived&>(*this))[index];
     }
 
     auto operator () () -> decltype(auto) {
-        return static_cast<E&>(*this);
+        return static_cast<Derived&>(*this);
     }
 
     auto operator () () const -> decltype(auto) {
-        return static_cast<const E&>(*this);
+        return static_cast<const Derived&>(*this);
     }
 };
 

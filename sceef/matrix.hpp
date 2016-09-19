@@ -6,6 +6,9 @@
 #ifndef SCEEF_MATRIX_HPP
 #define SCEEF_MATRIX_HPP
 
+#include <sceef/matrix_expression.hpp>
+#include <array>
+
 namespace sceef {
 
 template <class T, int N, int M>
@@ -32,7 +35,7 @@ class Matrix
     {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                stroage_[i][j] = expression[i][j];
+                storage_[i][j] = expression[i][j];
             }
         }
     }

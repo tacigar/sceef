@@ -10,12 +10,11 @@
 #include <sceef/matrix_expression.hpp>
 
 TEST(MatrixTest, MatrixAccessTest) {
-    struct TestCase {
-        std::vector<std::vector<int> > in;
-    };
+    using TestCase = std::vector<std::vector<int> >;
 
     std::vector<TestCase> tests = {
         {{1, 2}, {2, 3}, {4, 5}},
+        {{-100, -20}, {2, 300}, {200000, 200000}},
     };
 
     for (const auto& test : tests) {
