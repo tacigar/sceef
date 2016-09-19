@@ -30,3 +30,17 @@ struct Divide {
         return lhs / rhs;
     }
 };
+
+struct Positive {
+    template <class T>
+    static T apply(T value) {
+        return value;
+    }
+};
+
+struct Negative {
+    template <class T>
+    static T apply(T value) {
+        return -value;
+    }
+};

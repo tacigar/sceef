@@ -1,9 +1,11 @@
 #include <vector>
 #include <utility>
 #include <gtest/gtest.h>
+#include <sceef/binary_operation.hpp>
+#include <sceef/unary_operation.hpp>
 #include <sceef/vector.hpp>
 #include <sceef/vector_expression.hpp>
-#include <sceef/binary_operation.hpp>
+
 
 TEST(VectorTest, VectorSizeTest) {
     std::vector<std::pair<int, int> > tests = {
@@ -60,6 +62,34 @@ TEST(VectorTest, VectorSubtractTest) {
         }
         for (int i = 0; i < 3; i++) {
             ASSERT_EQ(tmp[i], test.res[i]);
+        }
+    }
+}
+
+TEST(VectorTest, VectorUnaryOperationTest) {
+    struct TestCase {
+        bool isPositive;
+        sceef::Vector<int, 3> operand;
+        sceef::Vector<int, 3> result;
+    };
+
+    std::vector<TestCase> tests = {
+        {true, {1, 2, 3}, {1, 2, 3}},
+        {true, {-1, 2, -3}, {-1, 2, -3}},
+        {false, {1, 2, 3}, {-1, -2, -3}},
+        {false, {-1, 2, -3}, {1, -2, 3}},
+    };
+
+    for (const auto& test : tests) {
+        sceef::Vector<int, 3> tmp;
+        if (test.isPositive) {
+            tmp = +test.operand;
+        } else {
+            tmp = -test.operand;
+        }
+        
+        for (int i = 0; i < 3; i++) {
+            ASSERT_EQ(tmp[i], test.result[i]);
         }
     }
 }
