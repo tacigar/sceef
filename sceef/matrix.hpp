@@ -48,6 +48,56 @@ class Matrix
         return storage_[index];
     }
 
+    template <class Expression>
+    auto operator = (const MatrixExpression<Expression>& expression) -> decltype(auto) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                storage_[i][j] = expression[i][j];
+            }
+        }
+        return *this;
+    }
+
+    template <class Expression>
+    auto operator += (const MatrixExpression<Expression>& expression) -> decltype(auto) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                storage_[i][j] += expression[i][j];
+            }
+        }
+        return *this;
+    }
+
+    template <class Expression>
+    auto operator -= (const MatrixExpression<Expression>& expression) -> decltype(auto) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                storage_[i][j] -= expression[i][j];
+            }
+        }
+        return *this;
+    }
+
+    template <class Expression>
+    auto operator *= (const MatrixExpression<Expression>& expression) -> decltype(auto) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                storage_[i][j] *= expression[i][j];
+            }
+        }
+        return *this;
+    }
+
+    template <class Expression>
+    auto operator /= (const MatrixExpression<Expression>& expression) -> decltype(auto) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                storage_[i][j] /= expression[i][j];
+            }
+        }
+        return *this;
+    }
+
   private:
     StorageType storage_;
 };
