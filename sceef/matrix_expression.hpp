@@ -39,7 +39,7 @@ bool operator == (const MatrixExpression<Lhs>& lhs, const MatrixExpression<Rhs>&
 
     for (int i = 0; i < Lhs::COLUMN_SIZE; i++) {
         for (int j = 0; j < Lhs::ROW_SIZE; j++) {
-            if (lhs.at(i) != rhs.at(i)) {
+            if (!equals(lhs.at(i), rhs.at(i))) {
                 return false;
             }
         }

@@ -37,7 +37,7 @@ bool operator == (const VectorExpression<Lhs>& lhs, const VectorExpression<Rhs>&
     static_assert(Lhs::SIZE == Rhs::SIZE, "error : left size and right size are different");
 
     for (int i = 0; i < Lhs::SIZE; i++) {
-        if (lhs.at(i) != rhs.at(i)) {
+        if (!equals(lhs.at(i), rhs.at(i))) {
             return false;
         }
     }
