@@ -32,6 +32,23 @@ class VectorExpression {
     }
 };
 
+template <class Lhs, class Rhs>
+bool operator == (const VectorExpression<Lhs>& lhs, const VectorExpression<Rhs>& rhs) {
+    static_assert(Lhs::SIZE == Rhs::SIZE, "error : left size and right size are different");
+
+    for (int i = 0; i < Lhs::SIZE; i++) {
+        if (lhs.at(i) != rhs.at(i)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+template <class Lhs, class Rhs>
+bool operator != (const VectorExpression<Lhs>& lhs, const VectorExpression<Rhs>& rhs) {
+    return !(lhs == rhs);
+}
+
 } // namespace sceef
 
 #endif // SCEEF_VECTOR_EXPRESSION_HPP
