@@ -27,15 +27,14 @@ class VectorBinaryOperation
     {
     }
 
-    auto operator [] (int index) const -> decltype(auto) {
-        return Operator::apply(lhs_[index], rhs_[index]);
+    auto at(int index) const -> decltype(auto) {
+        return Operator::apply(lhs_.at(index), rhs_.at(index));
     }
     
   private:
     const Lhs& lhs_;
     const Rhs& rhs_;
 };
-
 
 template <class Lhs, class Rhs>
 auto operator + (const VectorExpression<Lhs>& lhs, const VectorExpression<Rhs>& rhs) -> decltype(auto) {
