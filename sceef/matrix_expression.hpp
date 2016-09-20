@@ -32,6 +32,26 @@ class MatrixExpression {
     }
 };
 
+template <class Lhs, class Rhs>
+bool operator == (const MatrixExpression<Lhs>& lhs, const MatrixExpression<Rhs>& rhs) {
+    static_assert(Lhs::ROW_SIZE == Rhs::ROW_SIZE, "error : left row size and right row size are different");
+    static_assert(Lhs::COLUMN_SIZE == Rhs::COLUMN_SIZE, "error : left col size and right col size are different");
+
+    for (int i = 0; i < Lhs::COLUMN_SIZE; i++) {
+        for (int j = 0; j < Lhs::ROW_SIZE; j++) {
+            if (lhs.at(i) != rhs.at(i)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+template <class Lhs, class Rhs>
+bool operator != (const MatrixExpression<Lhs>& lhs, const MatrixExpression<Rhs>& rhs) {
+    return !(lhs == rhs);
+}
+
 } // namespace sceef
 
 #endif // SCEEF_MATRIX_EXPRESSION_HPP
