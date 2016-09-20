@@ -21,7 +21,7 @@ class VectorUnaryOperation
     {
     }
 
-    auto operator [] (int index) const -> decltype(auto) {
+    auto at(int index) const -> decltype(auto) {
         return Operator::apply(operand_.at(index));
     }
 
