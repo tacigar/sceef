@@ -125,7 +125,7 @@ TEST(MatrixTest, MatrixProductTest) {
     };
 
     for (const auto& test : tests) {
-        sceef::Matrix<int, 3, 3> tmp = product(test.lhs, test.rhs);
+        sceef::Matrix<int, 3, 3> tmp = sceef::product(test.lhs, test.rhs);
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {

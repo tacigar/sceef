@@ -9,6 +9,17 @@
 namespace sceef {
 
 template <class Lhs, class Rhs>
+auto product(const VectorExpression<Lhs>& lhs, const VectorExpression<Rhs>& rhs) -> decltype(auto) {
+    static_assert(Lhs::SIZE == Rhs::SIZE, "error : left size and right size are different");
+
+    decltype(lhs.at(0) * rhs.at(0)) res = 0;
+    for (int i = 0; i < Lhs::SIZE; i++) {
+        res += lhs.at(i) * rhs.at(i);
+    }
+    return res;
+}
+
+template <class Lhs, class Rhs>
 class MatrixProduct
         : public MatrixExpression<MatrixProduct<Lhs, Rhs> >
 {
