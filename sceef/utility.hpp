@@ -3,6 +3,11 @@
  * https://github.com/tacigar/sceef
  * ============================================================ */
 
+#include <algorithm>
+#include <cmath>
+#include <limits>
+#include <type_traits>
+
 struct Add {
     template <class T>
     static T apply(T lhs, T rhs) {

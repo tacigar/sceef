@@ -6,6 +6,8 @@
 #ifndef SCEEF_VECTOR_EXPRESSION_HPP
 #define SCEEF_VECTOR_EXPRESSION_HPP
 
+#include <iostream>
+
 namespace sceef {
 
 template <class Derived>

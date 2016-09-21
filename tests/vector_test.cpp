@@ -3,8 +3,10 @@
  * https://github.com/tacigar/sceef
  * ============================================================ */
 
-#include <vector>
+#include <sstream>
+#include <string>
 #include <utility>
+#include <vector>
 #include <gtest/gtest.h>
 #include <sceef/binary_operation.hpp>
 #include <sceef/unary_operation.hpp>

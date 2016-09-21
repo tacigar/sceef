@@ -6,8 +6,10 @@
 #ifndef SCEEF_MATRIX_HPP
 #define SCEEF_MATRIX_HPP
 
-#include <sceef/matrix_expression.hpp>
+#include <algorithm>
 #include <array>
+#include <iterator>
+#include <sceef/matrix_expression.hpp>
 
 namespace sceef {
 
