@@ -9,7 +9,7 @@
 #include <vector>
 #include <gtest/gtest.h>
 #include <sceef/binary_operation.hpp>
-#include <sceef/product_expression.hpp>
+#include <sceef/functions.hpp>
 #include <sceef/unary_operation.hpp>
 #include <sceef/vector.hpp>
 #include <sceef/vector_expression.hpp>
