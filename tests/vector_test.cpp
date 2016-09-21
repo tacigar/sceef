@@ -98,3 +98,21 @@ TEST(VectorTest, VectorUnaryOperationTest) {
         }
     }
 }
+
+TEST(VectorTest, VectorOStreamOperationTest) {
+    struct TestCase {
+        sceef::Vector<int, 3> vec;
+        std::string str;
+    };
+
+    std::vector<TestCase> tests = {
+        {{1, 2, 3}, "{ 1 2 3 }\n"},
+        {{-1, -2, -3}, "{ -1 -2 -3 }\n"},
+    };
+
+    for (const auto& test : tests) {
+        std::stringstream ss;
+        ss << test.vec;
+        ASSERT_EQ(ss.str(), test.str);
+    }
+}

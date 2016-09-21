@@ -49,6 +49,15 @@ bool operator != (const VectorExpression<Lhs>& lhs, const VectorExpression<Rhs>&
     return !(lhs == rhs);
 }
 
+template <class Expression>
+auto operator << (std::ostream& os, const VectorExpression<Expression>& expression) -> decltype(auto) {
+    os << "{ ";
+    for (int i = 0; i < Expression::SIZE; i++) {
+        os << expression.at(i) << ' ';
+    }
+    os << "}\n";
+}
+
 } // namespace sceef
 
 #endif // SCEEF_VECTOR_EXPRESSION_HPP
