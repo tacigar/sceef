@@ -52,6 +52,19 @@ bool operator != (const MatrixExpression<Lhs>& lhs, const MatrixExpression<Rhs>&
     return !(lhs == rhs);
 }
 
+template <class Expression>
+auto operator << (std::ostream& os, const MatrixExpression<Expression>& expression) -> decltype(auto) {
+    os << "{ ";
+    for (int i = 0; i < Expression::COLUMN_SIZE; i++) {
+        os << "{ ";
+        for (int j = 0; j < Expression::ROW_SIZE; j++) {
+            os << expression.at(i, j) << ' ';
+        }
+        os << "} ";
+    }
+    os << "}\n";
+}
+
 } // namespace sceef
 
 #endif // SCEEF_MATRIX_EXPRESSION_HPP

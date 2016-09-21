@@ -3,6 +3,8 @@
  * https://github.com/tacigar/sceef
  * ============================================================ */
 
+#include <sstream>
+#include <string>
 #include <vector>
 #include <utility>
 #include <gtest/gtest.h>
@@ -88,5 +90,23 @@ TEST(MatrixTest, MatrixUnaryOperationTest) {
                 ASSERT_EQ(tmp[i][j], test.result[i][j]);
             }
         }
+    }
+}
+
+TEST(MatrixTest, MatrixOStreamOperationTest) {
+    struct TestCase {
+        sceef::Matrix<int, 3, 2> mat;
+        std::string str;
+    };
+
+    std::vector<TestCase> tests = {
+        {{{1, 2}, {3, 4}, {5, 6}}, "{ { 1 2 } { 3 4 } { 5 6 } }\n"},
+        {{{-1, -2}, {3, 4}, {-5, 6}}, "{ { -1 -2 } { 3 4 } { -5 6 } }\n"},
+    };
+
+    for (const auto& test : tests) {
+        std::stringstream ss;
+        ss << test.mat;
+        ASSERT_EQ(ss.str(), test.str);
     }
 }
