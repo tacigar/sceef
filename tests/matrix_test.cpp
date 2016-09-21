@@ -9,9 +9,9 @@
 #include <vector>
 #include <gtest/gtest.h>
 #include <sceef/binary_operation.hpp>
+#include <sceef/functions.hpp>
 #include <sceef/matrix.hpp>
 #include <sceef/matrix_expression.hpp>
-#include <sceef/product_expression.hpp>
 #include <sceef/unary_operation.hpp>
 
 TEST(MatrixTest, MatrixAccessTest) {
