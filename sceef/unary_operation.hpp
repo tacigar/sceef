@@ -30,12 +30,12 @@ class VectorUnaryOperation
 };
 
 template <class Operand>
-auto operator + (const VectorExpression<Operand>& operand) {
+auto operator + (const VectorExpression<Operand>& operand) -> decltype(auto) {
     return VectorUnaryOperation<Positive, Operand>(operand());
 }
 
 template <class Operand>
-auto operator - (const VectorExpression<Operand>& operand) {
+auto operator - (const VectorExpression<Operand>& operand) -> decltype(auto) {
     return VectorUnaryOperation<Negative, Operand>(operand());
 }
 
@@ -64,12 +64,12 @@ class MatrixUnaryOperation
 };
 
 template <class Operand>
-auto operator + (const MatrixExpression<Operand>& operand) {
+auto operator + (const MatrixExpression<Operand>& operand) -> decltype(auto) {
     return MatrixUnaryOperation<Positive, Operand>(operand());
 }
 
 template <class Operand>
-auto operator - (const MatrixExpression<Operand>& operand) {
+auto operator - (const MatrixExpression<Operand>& operand) -> decltype(auto) {
     return MatrixUnaryOperation<Negative, Operand>(operand());
 }
 
