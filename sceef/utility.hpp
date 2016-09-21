@@ -3,6 +3,9 @@
  * https://github.com/tacigar/sceef
  * ============================================================ */
 
+#ifndef SCEEF_UTILITY_HPP
+#define SCEEF_UTILITY_HPP
+
 #include <algorithm>
 #include <cmath>
 #include <limits>
@@ -71,3 +74,5 @@ typename std::enable_if<std::is_integral<T>::value, bool>::type
 equals(T lhs, T rhs) {
     return lhs == rhs;
 }
+
+#endif // SCEEF_UTILITY_HPP
