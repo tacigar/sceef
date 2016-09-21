@@ -11,6 +11,7 @@
 #include <sceef/binary_operation.hpp>
 #include <sceef/matrix.hpp>
 #include <sceef/matrix_expression.hpp>
+#include <sceef/product_expression.hpp>
 #include <sceef/unary_operation.hpp>
 
 TEST(MatrixTest, MatrixAccessTest) {
@@ -108,5 +109,28 @@ TEST(MatrixTest, MatrixOStreamOperationTest) {
         std::stringstream ss;
         ss << test.mat;
         ASSERT_EQ(ss.str(), test.str);
+    }
+}
+
+TEST(MatrixTest, MatrixProductTest) {
+    struct TestCase {
+        sceef::Matrix<int, 3, 2> lhs;
+        sceef::Matrix<int, 2, 3> rhs;
+        sceef::Matrix<int, 3, 3> res;
+    };
+
+    std::vector<TestCase> tests = {
+        { {{2, 3}, {1, 4}, {2, 1}}, {{3, 1, 2}, {2, 4, 2}},
+          {{12, 14, 10}, {11, 17, 10}, {8, 6, 6}} },
+    };
+
+    for (const auto& test : tests) {
+        sceef::Matrix<int, 3, 3> tmp = product(test.lhs, test.rhs);
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                ASSERT_EQ(tmp[i][j], test.res[i][j]);
+            }
+        }
     }
 }
