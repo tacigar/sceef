@@ -12,9 +12,9 @@ template <class Lhs, class Rhs>
 auto product(const VectorExpression<Lhs>& lhs, const VectorExpression<Rhs>& rhs) -> decltype(auto) {
     static_assert(Lhs::SIZE == Rhs::SIZE, "error : left size and right size are different");
 
-    decltype(lhs_.at(0) * rhs_.at(0)) res = 0;
+    decltype(lhs.at(0) * rhs.at(0)) res = 0;
     for (int i = 0; i < Lhs::SIZE; i++) {
-        res += lhs_.at(i) * rhs_.at(i);
+        res += lhs.at(i) * rhs.at(i);
     }
     return res;
 }

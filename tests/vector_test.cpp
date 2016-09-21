@@ -9,6 +9,7 @@
 #include <vector>
 #include <gtest/gtest.h>
 #include <sceef/binary_operation.hpp>
+#include <sceef/product_expression.hpp>
 #include <sceef/unary_operation.hpp>
 #include <sceef/vector.hpp>
 #include <sceef/vector_expression.hpp>
@@ -116,5 +117,22 @@ TEST(VectorTest, VectorOStreamOperationTest) {
         std::stringstream ss;
         ss << test.vec;
         ASSERT_EQ(ss.str(), test.str);
+    }
+}
+
+TEST(VectorTest, VectorProductTest) {
+    struct TestCase {
+        sceef::Vector<int, 3> lhs;
+        sceef::Vector<int, 3> rhs;
+        int res;
+    };
+
+    std::vector<TestCase> tests = {
+        {{1, 2, 3}, {4, 5, 6}, 32},
+    };
+
+    for (const auto& test : tests) {
+        int p = sceef::product(test.lhs, test.rhs);
+        ASSERT_EQ(p, test.res);
     }
 }
