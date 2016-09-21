@@ -62,7 +62,7 @@ auto operator << (std::ostream& os, const MatrixExpression<Expression>& expressi
         }
         os << "} ";
     }
-    os << "}\n";
+    os << "}";
 }
 
 } // namespace sceef

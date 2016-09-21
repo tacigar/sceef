@@ -55,7 +55,7 @@ auto operator << (std::ostream& os, const VectorExpression<Expression>& expressi
     for (int i = 0; i < Expression::SIZE; i++) {
         os << expression.at(i) << ' ';
     }
-    os << "}\n";
+    os << "}";
 }
 
 } // namespace sceef
