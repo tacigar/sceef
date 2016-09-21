@@ -16,7 +16,6 @@ class VectorExpression {
     static constexpr int SIZE = Derived::SIZE;
     
   public:
-    
     auto at(int index) -> decltype(auto) {
         return (static_cast<Derived&>(*this)).at(index);
     }

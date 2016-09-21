@@ -26,7 +26,7 @@ class MatrixProduct
     }
 
     auto at(int i, int j) const -> decltype(auto) {
-        int sum = 0;
+        decltype(lhs_.at(0, 0) * rhs_.at(0, 0)) sum = 0;
         for (int k = 0; k < Lhs::ROW_SIZE; k++) {
             sum += lhs_.at(i, k) * rhs_.at(k, j);
         }
