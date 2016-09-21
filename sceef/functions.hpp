@@ -3,8 +3,8 @@
  * https://github.com/tacigar/sceef
  * ============================================================ */
 
-#ifndef SCEEF_PRODUCT_EXPRESSION_HPP
-#define SCEEF_PRODUCT_EXPRESSION_HPP
+#ifndef SCEEF_FUNCTIONS_HPP
+#define SCEEF_FUNCTIONS_HPP
 
 namespace sceef {
 
@@ -56,4 +56,4 @@ auto product(const MatrixExpression<Lhs>& lhs, const MatrixExpression<Rhs>& rhs)
 
 } // namespace sceef
 
-#endif // SCEEF_PRODUCT_EXPRESSION_HPP
+#endif // SCEEF_FUNCTIONS_HPP
