@@ -38,6 +38,11 @@ class MatrixProduct
     const Rhs& rhs_;
 };
 
+template <class Lhs, class Rhs>
+auto product(const MatrixExpression<Lhs>& lhs, const MatrixExpression<Rhs>& rhs) -> decltype(auto) {
+    return MatrixProduct<Lhs, Rhs>(lhs(), rhs());
+}
+
 } // namespace sceef
 
 #endif // SCEEF_PRODUCT_EXPRESSION_HPP
