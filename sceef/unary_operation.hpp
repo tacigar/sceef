@@ -6,6 +6,10 @@
 #ifndef SCEEF_UNARY_OPERATION_HPP
 #define SCEEF_UNARY_OPERATION_HPP
 
+#include <sceef/matrix_expression.hpp>
+#include <sceef/utility.hpp>
+#include <sceef/vector_expression.hpp>
+
 namespace sceef {
 
 template <class Operator, class Operand>

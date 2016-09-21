@@ -6,9 +6,10 @@
 #ifndef SCEEF_VECTOR_HPP
 #define SCEEF_VECTOR_HPP
 
-#include <sceef/vector_expression.hpp>
 #include <algorithm>
 #include <array>
+#include <iterator>
+#include <sceef/vector_expression.hpp>
 
 namespace sceef {
 
