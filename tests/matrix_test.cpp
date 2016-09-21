@@ -9,6 +9,7 @@
 #include <sceef/binary_operation.hpp>
 #include <sceef/matrix.hpp>
 #include <sceef/matrix_expression.hpp>
+#include <sceef/unary_operation.hpp>
 
 TEST(MatrixTest, MatrixAccessTest) {
     using TestCase = std::vector<std::vector<int> >;
@@ -55,6 +56,36 @@ TEST(MatrixTest, MatrixAddTest) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
                 ASSERT_EQ(tmp[i][j], test.res[i][j]);
+            }
+        }
+    }
+}
+
+TEST(MatrixTest, MatrixUnaryOperationTest) {
+    struct TestCase {
+        bool isPositive;
+        sceef::Matrix<int, 3, 2> operand;
+        sceef::Matrix<int, 3, 2> result;
+    };
+
+    std::vector<TestCase> tests = {
+        {true, {{1, 2}, {3, 4}, {5, 6}}, {{1, 2}, {3, 4}, {5, 6}}},
+        {true, {{-1, 2}, {3, -4}, {-5, 6}}, {{-1, 2}, {3, -4}, {-5, 6}}},
+        {false, {{1, 2}, {3, 4}, {5, 6}}, {{-1, -2}, {-3, -4}, {-5, -6}}},
+        {false, {{-1, 2}, {3, -4}, {-5, 6}}, {{1, -2}, {-3, 4}, {5, -6}}},
+    };
+
+    for (const auto& test : tests) {
+        sceef::Matrix<int, 3, 2> tmp;
+        if (test.isPositive) {
+            tmp = +test.operand;
+        } else {
+            tmp = -test.operand;
+        }
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 2; j++) {
+                ASSERT_EQ(tmp[i][j], test.result[i][j]);
             }
         }
     }
