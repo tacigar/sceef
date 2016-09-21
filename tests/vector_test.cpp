@@ -106,8 +106,8 @@ TEST(VectorTest, VectorOStreamOperationTest) {
     };
 
     std::vector<TestCase> tests = {
-        {{1, 2, 3}, "{ 1 2 3 }\n"},
-        {{-1, -2, -3}, "{ -1 -2 -3 }\n"},
+        {{1, 2, 3}, "{ 1 2 3 }"},
+        {{-1, -2, -3}, "{ -1 -2 -3 }"},
     };
 
     for (const auto& test : tests) {
