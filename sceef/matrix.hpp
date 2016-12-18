@@ -117,8 +117,8 @@ public:
     return *this;
   }
 
-  private:
-    StorageType storage_;
+private:
+  StorageType storage_;
 };
 
 } // namespace sceef

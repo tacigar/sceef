@@ -30,9 +30,7 @@ public:
   static constexpr int COLUMN_SIZE = Lhs::COLUMN_SIZE;
 
 public:
-  MatrixProduct(const Lhs& lhs, const Rhs& rhs)
-    : lhs_(lhs), rhs_(rhs)
-  {
+  MatrixProduct(const Lhs& lhs, const Rhs& rhs) : lhs_(lhs), rhs_(rhs) {
   }
 
   auto at(int i, int j) const -> decltype(auto) {
