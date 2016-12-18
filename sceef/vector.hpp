@@ -15,98 +15,91 @@ namespace sceef {
 
 template <class T, int N>
 class Vector
-        : public VectorExpression<Vector<T, N> >
-{
-  public:
-    static constexpr int SIZE = N;
-    
-  private:
-    using ContainerType = std::array<T, N>;
+  : public VectorExpression<Vector<T, N> > {
+public:
+  static constexpr int SIZE = N;
 
-  public:
-    Vector()
-            : storage_()
-    {
+private:
+  using ContainerType = std::array<T, N>;
+
+public:
+  Vector() : storage_() {
+  }
+
+  Vector(std::initializer_list<T> initList) : storage_() {
+    auto minSize = std::min(static_cast<int>(initList.size()), N);
+    auto itr = std::begin(initList);
+
+    for (int i = 0; i < minSize; i++, itr++) {
+      storage_[i] = *itr;
     }
+  }
 
-    Vector(std::initializer_list<T> initList)
-            : storage_()
-    {
-        auto minSize = std::min(static_cast<int>(initList.size()), N);
-        auto itr = std::begin(initList);
-
-        for (int i = 0; i < minSize; i++, itr++) {
-            storage_[i] = *itr;
-        }
+  template <class Expression>
+  Vector(const VectorExpression<Expression>& expression) : storage_() {
+    for (int i = 0; i < N; i++) {
+      storage_[i] = expression.at(i);
     }
+  }
 
-    template <class Expression>
-    Vector(const VectorExpression<Expression>& expression)
-            : storage_()
-    {
-        for (int i = 0; i < N; i++) {
-            storage_[i] = expression.at(i);
-        }
-    }
+  T& operator [] (int index) {
+    return storage_[index];
+  }
 
-    T& operator [] (int index) {
-        return storage_[index];
-    }
+  const T& operator [] (int index) const {
+    return storage_[index];
+  }
 
-    const T& operator [] (int index) const {
-        return storage_[index];
-    }
+  T& at(int index) {
+    return storage_[index];
+  }
 
-    T& at(int index) {
-        return storage_[index];
-    }
+  const T& at(int index) const {
+    return storage_[index];
+  }
 
-    const T& at(int index) const {
-        return storage_[index];
+  template <class Expression>
+  auto operator = (const VectorExpression<Expression>& expression) -> decltype(auto) {
+    for (int i = 0; i < N; i++) {
+      storage_[i] = expression.at(i);
     }
+    return *this;
+  }
 
-    template <class Expression>
-    auto operator = (const VectorExpression<Expression>& expression) -> decltype(auto) {
-        for (int i = 0; i < N; i++) {
-            storage_[i] = expression.at(i);
-        }
-        return *this;
+  template <class Expression>
+  auto operator += (const VectorExpression<Expression>& expression) -> decltype(auto) {
+    for (int i = 0; i < N; i++) {
+      storage_[i] += expression.at(i);
     }
+    return *this;
+  }
 
-    template <class Expression>
-    auto operator += (const VectorExpression<Expression>& expression) -> decltype(auto) {
-        for (int i = 0; i < N; i++) {
-            storage_[i] += expression.at(i);
-        }
-        return *this;
+  template <class Expression>
+  auto operator -= (const VectorExpression<Expression>& expression) -> decltype(auto) {
+    for (int i = 0; i < N; i++) {
+      storage_[i] -= expression.at(i);
     }
+    return *this;
+  }
 
-    template <class Expression>
-    auto operator -= (const VectorExpression<Expression>& expression) -> decltype(auto) {
-        for (int i = 0; i < N; i++) {
-            storage_[i] -= expression.at(i);
-        }
-        return *this;
+  template <class Expression>
+  auto operator *= (const VectorExpression<Expression>& expression) -> decltype(auto) {
+    for (int i = 0; i < N; i++) {
+      storage_[i] *= expression.at(i);
     }
+    return *this;
+  }
 
-    template <class Expression>
-    auto operator *= (const VectorExpression<Expression>& expression) -> decltype(auto) {
-        for (int i = 0; i < N; i++) {
-            storage_[i] *= expression.at(i);
-        }
-        return *this;
+  template <class Expression>
+  auto operator /= (const VectorExpression<Expression>& expression) -> decltype(auto) {
+    for (int i = 0; i < N; i++) {
+      storage_[i] /= expression.at(i);
     }
+    return *this;
+  }
 
-    template <class Expression>
-    auto operator /= (const VectorExpression<Expression>& expression) -> decltype(auto) {
-        for (int i = 0; i < N; i++) {
-            storage_[i] /= expression.at(i);
-        }
-        return *this;
-    }
-    
-  private:
-    ContainerType storage_;
+private:
+  ContainerType storage_;
 };
 
 } // namespace sceef
