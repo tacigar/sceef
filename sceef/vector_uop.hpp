@@ -6,18 +6,14 @@
  * file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
  * ============================================================================= */
 
-#ifndef SCEEF_VECTOR_EXPRESSION_HPP
-#define SCEEF_VECTOR_EXPRESSION_HPP
-
-#include <sceef/vector_base_expression.hpp>
-#include <sceef/vector_tag.hpp>
+#ifndef SCEEF_VECTOR_UOP_HPP
+#define SCEEF_VECTOR_UOP_HPP
 
 namespace sceef {
 
-	template <class Derived>
-	using vector_expression =
-		sceef::vector_base_expression<Derived, sceef::vector_tag>;
+	template <class Op, class E>
+	using vector_uop = sceef::vector_base_uop<Op, E, sceef::vector_tag>;
 	
 } // namespace sceef
 
-#endif // SCEEF_VECTOR_EXPRESSION_HPP
+#endif // SCEEF_VECTOR_UOP_HPP
