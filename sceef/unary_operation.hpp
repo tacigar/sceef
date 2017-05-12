@@ -12,64 +12,64 @@
 
 namespace sceef {
 
-template <class Operator, class Operand>
-class VectorUnaryOperation
-  : public VectorExpression<VectorUnaryOperation<Operator, Operand> > {
-public:
-  static constexpr int SIZE = Operand::SIZE;
+	template <class Operator, class Operand>
+	class VectorUnaryOperation
+		: public VectorExpression<VectorUnaryOperation<Operator, Operand> > {
+	public:
+		static constexpr int SIZE = Operand::SIZE;
 
-public:
-  VectorUnaryOperation(const Operand& operand) : operand_(operand) {
-  }
+	public:
+		VectorUnaryOperation(const Operand& operand) : operand_(operand) {
+		}
 
-  auto at(int index) const -> decltype(auto) {
-    return Operator::apply(operand_.at(index));
-  }
+		auto at(int index) const -> decltype(auto) {
+			return Operator::apply(operand_.at(index));
+		}
 
-private:
-  const Operand& operand_;
-};
+	private:
+		const Operand& operand_;
+	};
 
-template <class Operand>
-auto operator + (const VectorExpression<Operand>& operand) -> decltype(auto) {
-  return VectorUnaryOperation<Positive, Operand>(operand());
-}
+	template <class Operand>
+	auto operator + (const VectorExpression<Operand>& operand) -> decltype(auto) {
+		return VectorUnaryOperation<Positive, Operand>(operand());
+	}
 
-template <class Operand>
-auto operator - (const VectorExpression<Operand>& operand) -> decltype(auto) {
-  return VectorUnaryOperation<Negative, Operand>(operand());
-}
+	template <class Operand>
+	auto operator - (const VectorExpression<Operand>& operand) -> decltype(auto) {
+		return VectorUnaryOperation<Negative, Operand>(operand());
+	}
 
 // ============================================================
 
-template <class Operator, class Operand>
-class MatrixUnaryOperation
-  : public MatrixExpression<MatrixUnaryOperation<Operator, Operand> > {
-public:
-  static constexpr int ROW_SIZE = Operand::ROW_SIZE;
-  static constexpr int COLUMN_SIZE = Operand::COLUMN_SIZE;
+	template <class Operator, class Operand>
+	class MatrixUnaryOperation
+		: public MatrixExpression<MatrixUnaryOperation<Operator, Operand> > {
+	public:
+		static constexpr int ROW_SIZE = Operand::ROW_SIZE;
+		static constexpr int COLUMN_SIZE = Operand::COLUMN_SIZE;
 
-public:
-  MatrixUnaryOperation(const Operand& operand) : operand_(operand) {
-  }
+	public:
+		MatrixUnaryOperation(const Operand& operand) : operand_(operand) {
+		}
 
-  auto at(int i, int j) const -> decltype(auto) {
-    return Operator::apply(operand_.at(i, j));
-  }
+		auto at(int i, int j) const -> decltype(auto) {
+			return Operator::apply(operand_.at(i, j));
+		}
 
-private:
-  const Operand& operand_;
-};
+	private:
+		const Operand& operand_;
+	};
 
-template <class Operand>
-auto operator + (const MatrixExpression<Operand>& operand) -> decltype(auto) {
-  return MatrixUnaryOperation<Positive, Operand>(operand());
-}
+	template <class Operand>
+	auto operator + (const MatrixExpression<Operand>& operand) -> decltype(auto) {
+		return MatrixUnaryOperation<Positive, Operand>(operand());
+	}
 
-template <class Operand>
-auto operator - (const MatrixExpression<Operand>& operand) -> decltype(auto) {
-  return MatrixUnaryOperation<Negative, Operand>(operand());
-}
+	template <class Operand>
+	auto operator - (const MatrixExpression<Operand>& operand) -> decltype(auto) {
+		return MatrixUnaryOperation<Negative, Operand>(operand());
+	}
 
 } // namespace sceef
 
