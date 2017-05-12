@@ -1,126 +1,102 @@
-/* ============================================================
+/* =============================================================================
  * Copyright (c) 2016 tacigar. All rights reserved.
  * https://github.com/tacigar/sceef
- * ============================================================ */
+ *
+ * Distributed under the Boost Software License, Version 1.0. (See accompanying
+ * file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ * ============================================================================= */
 
 #ifndef SCEEF_MATRIX_HPP
 #define SCEEF_MATRIX_HPP
 
 #include <algorithm>
-#include <array>
-#include <iterator>
+#include <cstddef>
+#include <initializer_list>
 #include <sceef/matrix_expression.hpp>
+#include <sceef/row_vector.hpp>
 
 namespace sceef {
-
-	template <class T, int N, int M>
-	class Matrix
-		: public MatrixExpression<Matrix<T, N, M> > {
+			  
+	template <class T, std::size_t N, std::size_t M>
+	class matrix
+		: public sceef::matrix_expression<sceef::matrix<T, N, M>> {
 	public:
-		static constexpr int ROW_SIZE = M;
-		static constexpr int COLUMN_SIZE = N;
+		constexpr
+		matrix(): elements_() {
+		}
 
+		constexpr
+		matrix(std::initializer_list<std::initializer_list<T>> initlist)
+			: elements_() {
+			auto min_size = std::min(initlist.size(), N);
+			auto itr = initlist.begin();
+			
+			for (auto i = 0; i < min_size; ++i, ++itr) {
+				elements_[i] = sceef::row_vector<T, M>(*itr);
+			}
+		}
+
+		template <class E>
+		constexpr
+		matrix(const sceef::matrix_expression<E>& expr): elements_() {
+			for (auto i = 0; i < N; ++i) {
+				for (auto j = 0; j < M; ++j) {
+					elements_[i][j] = expr[i][j];
+				}
+			}
+		}
+
+		constexpr
+		auto size() const -> std::size_t {
+			return N;
+		}
+
+		constexpr
+		auto column_size() const -> std::size_t {
+			return N;
+		}
+
+		constexpr
+		auto row_size() const -> std::size_t {
+			return M;
+		}
+		
+		constexpr
+		auto operator[](std::size_t index) -> sceef::row_vector<T, M>& {
+			return elements_[index];
+		}
+
+		constexpr
+		auto operator[](std::size_t index) const
+			-> const sceef::row_vector<T, M>& {
+			return elements_[index];
+		}
+
+		constexpr
+		auto at(std::size_t index) -> sceef::row_vector<T, M>& {
+			return elements_.at(index);
+		}
+
+		constexpr
+		auto at(std::size_t index) const
+			-> const sceef::row_vector<T, M>& {
+			return elements_.at(index);
+		}
+
+		constexpr
+		auto at(std::size_t i, std::size_t j) -> T& {
+			return elements_.at(i).at(j);
+		}
+
+		constexpr
+		auto at(std::size_t i, std::size_t j) const -> const T& {
+			return elements_.at(i).at(j);
+		}
+		
 	private:
-		using RowType = std::array<T, M>;
-		using StorageType = std::array<RowType, N>;
-
-	public:
-		Matrix() : storage_() {
-		}
-
-		Matrix(std::initializer_list<std::initializer_list<T> > initList) : storage_() {
-			auto minColSize = std::min(static_cast<int>(initList.size()), N);
-			auto itrCol = std::begin(initList);
-
-			for (int i = 0; i < minColSize; i++, itrCol++) {
-				auto minRowSize = std::min(static_cast<int>(itrCol->size()), M);
-				auto itrRow = std::begin(*itrCol);
-
-				for (int j = 0; j < minRowSize; j++, itrRow++) {
-					storage_[i][j] = *itrRow;
-				}
-			}
-		}
-
-		template <class Expression>
-		Matrix(const MatrixExpression<Expression>& expression) : storage_() {
-			for (int i = 0; i < N; i++) {
-				for (int j = 0; j < M; j++) {
-					storage_[i][j] = expression.at(i, j);
-				}
-			}
-		}
-
-		RowType& operator [] (int index) {
-			return storage_[index];
-		}
-
-		const RowType& operator [] (int index) const {
-			return storage_[index];
-		}
-
-		T& at(int i, int j) {
-			return storage_[i][j];
-		}
-
-		const T& at(int i, int j) const {
-			return storage_[i][j];
-		}
-
-		template <class Expression>
-		auto operator = (const MatrixExpression<Expression>& expression) -> decltype(auto) {
-			for (int i = 0; i < N; i++) {
-				for (int j = 0; j < M; j++) {
-					storage_[i][j] = expression.at(i, j);
-				}
-			}
-			return *this;
-		}
-
-		template <class Expression>
-		auto operator += (const MatrixExpression<Expression>& expression) -> decltype(auto) {
-			for (int i = 0; i < N; i++) {
-				for (int j = 0; j < M; j++) {
-					storage_[i][j] += expression.at(i, j);
-				}
-			}
-			return *this;
-		}
-
-		template <class Expression>
-		auto operator -= (const MatrixExpression<Expression>& expression) -> decltype(auto) {
-			for (int i = 0; i < N; i++) {
-				for (int j = 0; j < M; j++) {
-					storage_[i][j] -= expression.at(i, j);
-				}
-			}
-			return *this;
-		}
-
-		template <class Expression>
-		auto operator *= (const MatrixExpression<Expression>& expression) -> decltype(auto) {
-			for (int i = 0; i < N; i++) {
-				for (int j = 0; j < M; j++) {
-					storage_[i][j] *= expression.at(i, j);
-				}
-			}
-			return *this;
-		}
-
-		template <class Expression>
-		auto operator /= (const MatrixExpression<Expression>& expression) -> decltype(auto) {
-			for (int i = 0; i < N; i++) {
-				for (int j = 0; j < M; j++) {
-					storage_[i][j] /= expression.at(i, j);
-				}
-			}
-			return *this;
-		}
-
-	private:
-		StorageType storage_;
+		std::array<sceef::row_vector<T, M>, N> elements_;
 	};
-
+	
 } // namespace sceef
 
-#endif // oSCEEF_MATRIX_HPP
+#endif // SCEEF_MATRIX_HPP
