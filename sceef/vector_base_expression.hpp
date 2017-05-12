@@ -46,6 +46,25 @@ namespace sceef {
 			return static_cast<const Derived&>(*this);
 		}
 	};
+
+	template <class LE, class RE, class Tag>
+	constexpr
+	auto operator==(const sceef::vector_base_expression<LE, Tag>& lhs,
+					const sceef::vector_base_expression<RE, Tag>& rhs) -> decltype(auto) {
+		for (auto i = 0; i < lhs.size(); ++i) {
+			if (!sceef::equals(lhs[i], rhs[i])) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	template <class LE, class RE, class Tag>
+	constexpr
+	auto operator!=(const sceef::vector_base_expression<LE, Tag>& lhs,
+					const sceef::vector_base_expression<RE, Tag>& rhs) -> decltype(auto) {
+		return !(lhs == rhs);
+	}
 	
 } // namespace sceef
 
