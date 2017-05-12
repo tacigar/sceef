@@ -13,8 +13,7 @@ namespace sceef {
 
 	template <class Op, class E, class Tag>
 	class vector_base_uop
-		: public sceef::vector_base_expression<sceef::vector_base_uop<
-												   Op, E, Tag>, Tag> {
+		: public sceef::vector_base_expression<sceef::vector_base_uop<Op, E, Tag>, Tag> {
 	public:
 		constexpr
 		vector_base_uop(const E& expr): expr_(expr) {

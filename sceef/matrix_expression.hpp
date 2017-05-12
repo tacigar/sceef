@@ -58,6 +58,7 @@ namespace sceef {
 	};
 
 	template <class LE, class RE>
+	constexpr
 	auto operator==(const sceef::matrix_expression<LE>& lhs,
 					const sceef::matrix_expression<RE>& rhs) -> decltype(auto) {
 		for (auto i = 0; i < lhs.size(); ++i) {
@@ -69,6 +70,7 @@ namespace sceef {
 	}
 
 	template <class LE, class RE>
+	constexpr
 	auto operator!=(const sceef::matrix_expression<LE>& lhs,
 					const sceef::matrix_expression<RE>& rhs) -> decltype(auto) {
 		return !(lhs == rhs);

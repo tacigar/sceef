@@ -17,8 +17,7 @@ namespace sceef {
 
 	template <class LE, class Op, class RE, class Tag>
 	class vector_base_bop
-		: public sceef::vector_base_expression<sceef::vector_base_bop<
-												   LE, Op, RE, Tag>, Tag> {
+		: public sceef::vector_base_expression<sceef::vector_base_bop<LE, Op, RE, Tag>, Tag> {
 	public:
 		constexpr
 		vector_base_bop(const LE& lhs, const RE& rhs)

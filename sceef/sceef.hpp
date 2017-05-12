@@ -9,18 +9,6 @@
 #ifndef SCEEF_SCEEF_HPP
 #define SCEEF_SCEEF_HPP
 
-/*
-#include <sceef/matrix.hpp>
-#include <sceef/matrix_bop.hpp>
-#include <sceef/matrix_expression.hpp>
-#include <sceef/matrix_prod.hpp>
-#include <sceef/matrix_row.hpp>
-#include <sceef/matrix_row_bop.hpp>
-#include <sceef/matrix_row_expression.hpp>
-#include <sceef/matrix_row_uop.hpp>
-#include <sceef/matrix_uop.hpp>
-*/
-
 #include <sceef/equals.hpp>
 #include <sceef/matrix.hpp>
 #include <sceef/matrix_bop.hpp>

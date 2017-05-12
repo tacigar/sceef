@@ -46,7 +46,7 @@ namespace sceef {
 			return static_cast<const Derived&>(*this);
 		}
 	};
-
+	
 } // namespace sceef
 
 #endif // SCEEF_VECTOR_BASE_EXPRESSION_HPP

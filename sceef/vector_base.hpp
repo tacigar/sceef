@@ -19,8 +19,7 @@ namespace sceef {
 
 	template <class T, std::size_t N, class Tag>
 	class vector_base
-		: public sceef::vector_base_expression<sceef::vector_base<
-												   T, N, Tag>, Tag> {
+		: public sceef::vector_base_expression<sceef::vector_base<T, N, Tag>, Tag> {
 	public:
 		constexpr
 		vector_base(): elements_() {
