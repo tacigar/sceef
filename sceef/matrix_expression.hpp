@@ -1,72 +1,79 @@
-/* ============================================================
+/* =============================================================================
  * Copyright (c) 2016 tacigar. All rights reserved.
  * https://github.com/tacigar/sceef
- * ============================================================ */
+ *
+ * Distributed under the Boost Software License, Version 1.0. (See accompanying
+ * file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+ * ============================================================================= */
 
 #ifndef SCEEF_MATRIX_EXPRESSION_HPP
 #define SCEEF_MATRIX_EXPRESSION_HPP
 
-#include <iostream>
+#include <cstddef>
 
 namespace sceef {
 
 	template <class Derived>
-	class MatrixExpression {
+	class matrix_expression {
 	public:
-		static constexpr int ROW_SIZE = Derived::ROW_SIZE;
-		static constexpr int COLUMN_SIZE = Derived::COLUMN_SIZE;
+		constexpr
+		auto operator[](std::size_t index) -> decltype(auto) {
+			return (static_cast<Derived&>(*this)).operator[](index);
+		}
 
-	public:
-		auto at(int i, int j) -> decltype(auto) {
+		constexpr
+		auto operator[](std::size_t index) const -> decltype(auto) {
+			return (static_cast<const Derived&>(*this)).operator[](index);
+		}
+
+		constexpr
+		auto at(std::size_t index) -> decltype(auto) {
+			return (static_cast<Derived&>(*this)).at(index);
+		}
+
+		constexpr
+		auto at(std::size_t index) const -> decltype(auto) {
+			return (static_cast<const Derived&>(*this)).at(index);
+		}
+
+		constexpr
+		auto at(std::size_t i, std::size_t j) -> decltype(auto) {
 			return (static_cast<Derived&>(*this)).at(i, j);
 		}
 
-		auto at(int i, int j) const -> decltype(auto) {
+		constexpr
+		auto at(std::size_t i, std::size_t j) const -> decltype(auto) {
 			return (static_cast<const Derived&>(*this)).at(i, j);
 		}
 
-		auto operator () () -> decltype(auto) {
+		constexpr
+		auto operator()() -> decltype(auto) {
 			return static_cast<Derived&>(*this);
 		}
 
-		auto operator () () const -> decltype(auto) {
+		constexpr
+		auto operator()() const -> decltype(auto) {
 			return static_cast<const Derived&>(*this);
 		}
 	};
 
-	template <class Lhs, class Rhs>
-	bool operator == (const MatrixExpression<Lhs>& lhs, const MatrixExpression<Rhs>& rhs) {
-		static_assert(Lhs::ROW_SIZE == Rhs::ROW_SIZE, "error : left row size and right row size are different");
-		static_assert(Lhs::COLUMN_SIZE == Rhs::COLUMN_SIZE, "error : left col size and right col size are different");
-
-		for (int i = 0; i < Lhs::COLUMN_SIZE; i++) {
-			for (int j = 0; j < Lhs::ROW_SIZE; j++) {
-				if (!equals(lhs.at(i), rhs.at(i))) {
-					return false;
-				}
+	template <class LE, class RE>
+	auto operator==(const sceef::matrix_expression<LE>& lhs,
+					const sceef::matrix_expression<RE>& rhs) -> decltype(auto) {
+		for (auto i = 0; i < lhs.size(); ++i) {
+			if (lhs[i] != rhs[i]) {
+				return false;
 			}
 		}
 		return true;
 	}
 
-	template <class Lhs, class Rhs>
-	bool operator != (const MatrixExpression<Lhs>& lhs, const MatrixExpression<Rhs>& rhs) {
+	template <class LE, class RE>
+	auto operator!=(const sceef::matrix_expression<LE>& lhs,
+					const sceef::matrix_expression<RE>& rhs) -> decltype(auto) {
 		return !(lhs == rhs);
 	}
-
-	template <class Expression>
-	auto operator << (std::ostream& os, const MatrixExpression<Expression>& expression) -> decltype(auto) {
-		os << "{ ";
-		for (int i = 0; i < Expression::COLUMN_SIZE; i++) {
-			os << "{ ";
-			for (int j = 0; j < Expression::ROW_SIZE; j++) {
-				os << expression.at(i, j) << ' ';
-			}
-			os << "} ";
-		}
-		os << "}";
-	}
-
+	
 } // namespace sceef
 
 #endif // SCEEF_MATRIX_EXPRESSION_HPP
