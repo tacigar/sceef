@@ -98,6 +98,25 @@ namespace sceef {
 			return *this;
 		}
 
+		template <class U>
+		constexpr
+		auto operator*=(U value) -> decltype(auto) {
+			for (auto i = 0; i < N; ++i) {
+				elements_[i] *= value;
+			}
+			return *this;
+		}
+
+		template <class U>
+		constexpr
+		auto operator/=(U value) -> decltype(auto) {
+			for (auto i = 0; i < N; ++i) {
+				elements_[i] /= value;
+			}
+			return *this;
+		}
+			
+
 	private:
 		std::array<T, N> elements_;
 	};
