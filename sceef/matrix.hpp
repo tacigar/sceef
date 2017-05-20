@@ -92,6 +92,64 @@ namespace sceef {
 		auto at(std::size_t i, std::size_t j) const -> const T& {
 			return elements_.at(i).at(j);
 		}
+
+		template <class E>
+		constexpr
+		auto operator=(const sceef::matrix_expression<E>& expr)
+			-> decltype(auto) {
+			for (auto i = 0; i < N; ++i) {
+				for (auto j = 0; j < M; ++j) {
+					elements_[i][j] = expr[i][j];
+				}
+			}
+			return *this;
+		}
+
+		template <class E>
+		constexpr
+		auto operator+=(const sceef::matrix_expression<E>& expr)
+			-> decltype(auto) {
+			for (auto i = 0; i < N; ++i) {
+				for (auto j = 0; j < M; ++j) {
+					elements_[i][j] += expr[i][j];
+				}
+			}
+			return *this;
+		}
+
+		template <class E>
+		constexpr
+		auto operator-=(const sceef::matrix_expression<E>& expr)
+			-> decltype(auto) {
+			for (auto i = 0; i < N; ++i) {
+				for (auto j = 0; j < M; ++j) {
+					elements_[i][j] -= expr[i][j];
+				}
+			}
+			return *this;
+		}
+
+		template <class U>
+		constexpr
+		auto operator*=(U value) -> decltype(auto) {
+			for (auto i = 0; i < N; ++i) {
+				for (auto j = 0; j < M; ++j) {
+					elements_[i][j] *= value;
+				}
+			}
+			return *this;
+		}
+
+		template <class U>
+		constexpr
+		auto operator/=(U value) -> decltype(auto) {
+			for (auto i = 0; i < N; ++i) {
+				for (auto j = 0; j < M; ++j) {
+					elements_[i][j] /= value;
+				}
+			}
+			return *this;
+		}
 		
 	private:
 		std::array<sceef::row_vector<T, M>, N> elements_;
