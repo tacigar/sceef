@@ -33,7 +33,7 @@ endif()
 
 # Now simply link against gtest or gtest_main as needed. Eg
 include_directories(../)
-add_compile_options(-std=c++14)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 add_executable(test_all test_vector.cpp test_matrix.cpp)
 target_link_libraries(test_all gtest_main)
 add_test(NAME example_test COMMAND test_all)
