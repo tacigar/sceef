@@ -1,15 +1,3 @@
 # Sceef - A minimul C++ Library for Linear Algebra - 
 
-## ビルド
-
-```
-$ mkdir build & cd build
-$ cmake ..
-$ make
-```
-
-## テスト
-
-```
-$ /build/test/test_all
-```
+[![Build Status](https://travis-ci.org/tacigar/sceef.svg?branch=master)](https://travis-ci.org/tacigar/sceef)
