@@ -1,4 +1,15 @@
-# Sceef
+# Sceef - A minimul C++ Library for Linear Algebra - 
 
-Sceef is a simple and lightweight linear algebra C++ library.  
+## ビルド
 
+```
+$ mkdir build & cd build
+$ cmake ..
+$ make
+```
+
+## テスト
+
+```
+$ /build/test/test_all
+```
