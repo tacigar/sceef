@@ -14,9 +14,9 @@
 
 namespace sceef {
 
-	template <class LE, class Op, class RE>
-	using vector_bop = sceef::vector_base_bop<LE, Op, RE, sceef::vector_tag>;
-	
+    template <class LE, class Op, class RE>
+    using vector_bop = sceef::vector_base_bop<LE, Op, RE, sceef::vector_tag>;
+    
 } // namespace sceef
 
 #endif // SCEEF_VECTOR_BOP_HPP

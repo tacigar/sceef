@@ -16,25 +16,24 @@
 
 namespace sceef {
 
-	template <class T>
-	auto fuzzy_equals(T lhs, T rhs) -> decltype(auto) {
-		auto max_value = std::max(std::abs(lhs), std::abs(rhs));
-		return std::abs(lhs - rhs) <=
-			std::numeric_limits<T>::epsilon() * max_value;
-	}
+    template <class T>
+    auto fuzzy_equals(T lhs, T rhs) -> decltype(auto) {
+        auto max_value = std::max(std::abs(lhs), std::abs(rhs));
+        return std::abs(lhs - rhs) <=
+            std::numeric_limits<T>::epsilon() * max_value;
+    }
 
-	template <class T>
-	auto equals(T lhs, T rhs)
-		-> typename std::enable_if<std::is_floating_point<T>::value,
-								   bool>::type {
-		return fuzzy_equals(lhs, rhs);
-	}
+    template <class T>
+    auto equals(T lhs, T rhs)
+        -> typename std::enable_if<std::is_floating_point<T>::value, bool>::type {
+        return fuzzy_equals(lhs, rhs);
+    }
 
-	template <class T>
-	auto equals(T lhs, T rhs)
-		-> typename std::enable_if<std::is_integral<T>::value, bool>::type {
-		return lhs == rhs;
-	}
+    template <class T>
+    auto equals(T lhs, T rhs)
+        -> typename std::enable_if<std::is_integral<T>::value, bool>::type {
+        return lhs == rhs;
+    }
 
 } // namespace sceef
 

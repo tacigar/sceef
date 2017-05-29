@@ -14,9 +14,9 @@
 
 namespace sceef {
 
-	template <class T, std::size_t N>
-	using row_vector = sceef::vector_base<T, N, sceef::row_vector_tag>;
-	
+    template <class T, std::size_t N>
+    using row_vector = sceef::vector_base<T, N, sceef::row_vector_tag>;
+    
 } // namespace sceef
 
 #endif // SCEEF_ROW_VECTOR_HPP
