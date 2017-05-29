@@ -16,28 +16,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * ============================================================================= */
 
-#ifndef SCEEF_SCEEF_HPP
-#define SCEEF_SCEEF_HPP
+#ifndef SCEEF_VECTOR_BASE_PROD_HPP
+#define SCEEF_VECTOR_BASE_PROD_HPP
 
-#include <sceef/equals.hpp>
-#include <sceef/matrix.hpp>
-#include <sceef/matrix_bop.hpp>
-#include <sceef/matrix_expression.hpp>
-#include <sceef/matrix_uop.hpp>
-#include <sceef/op.hpp>
-#include <sceef/row_vector.hpp>
-#include <sceef/row_vector_bop.hpp>
-#include <sceef/row_vector_expression.hpp>
-#include <sceef/row_vector_uop.hpp>
-#include <sceef/vector.hpp>
-#include <sceef/vector_base.hpp>
-#include <sceef/vector_base_bop.hpp>
-#include <sceef/vector_base_expression.hpp>
-#include <sceef/vector_base_prod.hpp>
-#include <sceef/vector_base_uop.hpp>
-#include <sceef/vector_bop.hpp>
-#include <sceef/vector_expression.hpp>
-#include <sceef/vector_tag.hpp>
-#include <sceef/vector_uop.hpp>
+namespace sceef {
 
-#endif // SCEEF_SCEEF_HPP
+    template <class LE, class LT, class RE, class RT>
+    constexpr
+    inline auto prod(const sceef::vector_base_expression<LE, LT>& lhs,
+                     const sceef::vector_base_expression<RE, RT>& rhs) -> decltype(auto) {
+        static_assert(LE::SIZE == RE::SIZE, "left hand's size != right hand's size.");
+        
+        decltype(lhs[0] * rhs[0]) sum = 0;
+        for (auto i = 0; i < LE::SIZE; ++i) {
+            sum += lhs[i] * rhs[i];
+        }
+        return sum;
+    }
+    
+} // namespace sceef
+
+#endif // SCEEF_VECTOR_BASE_PROD_HPP
