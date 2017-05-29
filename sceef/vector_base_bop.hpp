@@ -15,52 +15,52 @@
 
 namespace sceef {
 
-	template <class LE, class Op, class RE, class Tag>
-	class vector_base_bop
-		: public sceef::vector_base_expression<sceef::vector_base_bop<LE, Op, RE, Tag>, Tag> {
-	public:
-		static_assert(LE::SIZE == RE::SIZE, "left hand's size != right hand's size.");
-		static constexpr std::size_t SIZE = LE::SIZE;
+    template <class LE, class Op, class RE, class Tag>
+    class vector_base_bop
+        : public sceef::vector_base_expression<sceef::vector_base_bop<LE, Op, RE, Tag>, Tag> {
+    public:
+        static_assert(LE::SIZE == RE::SIZE, "left hand's size != right hand's size.");
+        static constexpr std::size_t SIZE = LE::SIZE;
 
-		constexpr
-		vector_base_bop(const LE& lhs, const RE& rhs)
-			: lhs_(lhs), rhs_(rhs) {
-		}
+        constexpr
+        vector_base_bop(const LE& lhs, const RE& rhs)
+            : lhs_(lhs), rhs_(rhs) {
+        }
 
-		constexpr
-		auto size() const -> std::size_t {
-			return SIZE;
-		}
+        constexpr
+        auto size() const -> std::size_t {
+            return SIZE;
+        }
 
-		constexpr
-		auto operator[](std::size_t index) const -> decltype(auto) {
-			return Op::apply(lhs_[index], rhs_[index]);
-		}
-		
-		constexpr
-		auto at(std::size_t index) const -> decltype(auto) {
-			return Op::apply(lhs_.at(index), rhs_.at(index));
-		}
+        constexpr
+        auto operator[](std::size_t index) const -> decltype(auto) {
+            return Op::apply(lhs_[index], rhs_[index]);
+        }
+        
+        constexpr
+        auto at(std::size_t index) const -> decltype(auto) {
+            return Op::apply(lhs_.at(index), rhs_.at(index));
+        }
 
-	private:
-		const LE& lhs_;
-		const RE& rhs_;
-	};
+    private:
+        const LE& lhs_;
+        const RE& rhs_;
+    };
 
-	template <class LE, class RE, class Tag>
-	constexpr
-	auto operator+(const sceef::vector_base_expression<LE, Tag>& lhs,
-				   const sceef::vector_base_expression<RE, Tag>& rhs) -> decltype(auto) {
-		return sceef::vector_base_bop<LE, sceef::op::add, RE, Tag>(lhs(), rhs());
-	}
+    template <class LE, class RE, class Tag>
+    constexpr
+    auto operator+(const sceef::vector_base_expression<LE, Tag>& lhs,
+                   const sceef::vector_base_expression<RE, Tag>& rhs) -> decltype(auto) {
+        return sceef::vector_base_bop<LE, sceef::op::add, RE, Tag>(lhs(), rhs());
+    }
 
-	template <class LE, class RE, class Tag>
-	constexpr
-	auto operator-(const sceef::vector_base_expression<LE, Tag>& lhs,
-				   const sceef::vector_base_expression<RE, Tag>& rhs) -> decltype(auto) {
-		return sceef::vector_base_bop<LE, sceef::op::subtract, RE, Tag>(lhs(), rhs());
-	}
-	
+    template <class LE, class RE, class Tag>
+    constexpr
+    auto operator-(const sceef::vector_base_expression<LE, Tag>& lhs,
+                   const sceef::vector_base_expression<RE, Tag>& rhs) -> decltype(auto) {
+        return sceef::vector_base_bop<LE, sceef::op::subtract, RE, Tag>(lhs(), rhs());
+    }
+    
 } // namespace sceef
 
 #endif // SCEEF_VECTOR_BASE_BOP_HPP

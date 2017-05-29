@@ -14,9 +14,9 @@
 
 namespace sceef {
 
-	template <class Op, class E>
-	using row_vector_uop = sceef::vector_base_uop<Op, E, sceef::row_vector_tag>;
-	
+    template <class Op, class E>
+    using row_vector_uop = sceef::vector_base_uop<Op, E, sceef::row_vector_tag>;
+    
 } // namespace sceef
 
 #endif // SCEEF_ROW_VECTOR_UOP_HPP

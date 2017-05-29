@@ -15,69 +15,69 @@
 #include <sceef/row_vector_uop.hpp>
 
 namespace sceef {
-	
-	template <class Op, class E>
-	class matrix_uop
-		: public sceef::matrix_expression<sceef::matrix_uop<Op, E>> {
-	public:
-		static constexpr std::size_t SIZE = E::SIZE;
-		static constexpr std::size_t COLUMN_SIZE = E::COLUMN_SIZE;
-		static constexpr std::size_t ROW_SIZE = E::ROW_SIZE;
+    
+    template <class Op, class E>
+    class matrix_uop
+        : public sceef::matrix_expression<sceef::matrix_uop<Op, E>> {
+    public:
+        static constexpr std::size_t SIZE = E::SIZE;
+        static constexpr std::size_t COLUMN_SIZE = E::COLUMN_SIZE;
+        static constexpr std::size_t ROW_SIZE = E::ROW_SIZE;
 
-		constexpr
-		matrix_uop(const E& expr): expr_(expr) {
-		}
+        constexpr
+        matrix_uop(const E& expr): expr_(expr) {
+        }
 
-		constexpr
-		auto size() const -> std::size_t {
-			return SIZE;
-		}
+        constexpr
+        auto size() const -> std::size_t {
+            return SIZE;
+        }
 
-		constexpr
-		auto column_size() const -> std::size_t {
-			return COLUMN_SIZE;
-		}
+        constexpr
+        auto column_size() const -> std::size_t {
+            return COLUMN_SIZE;
+        }
 
-		constexpr
-		auto row_size() const -> std::size_t {
-			return ROW_SIZE;
-		}
+        constexpr
+        auto row_size() const -> std::size_t {
+            return ROW_SIZE;
+        }
 
-		constexpr
-		auto operator[](std::size_t index) const -> decltype(auto) {
-			return sceef::row_vector_uop<
-				Op, decltype(expr_[index])>(expr_[index]);
-		}
-		
-		constexpr
-		auto at(std::size_t index) const -> decltype(auto) {
-			return sceef::row_vector_uop<
-				Op, decltype(expr_.at(index))>(expr_.at(index));
-		}
+        constexpr
+        auto operator[](std::size_t index) const -> decltype(auto) {
+            return sceef::row_vector_uop<
+                Op, decltype(expr_[index])>(expr_[index]);
+        }
+        
+        constexpr
+        auto at(std::size_t index) const -> decltype(auto) {
+            return sceef::row_vector_uop<
+                Op, decltype(expr_.at(index))>(expr_.at(index));
+        }
 
-		constexpr
-		auto at(std::size_t i, std::size_t j) const -> decltype(auto) {
-			return Op::apply(expr_.at(i, j));
-		}
-		
-	private:
-		const E& expr_;
-	};
+        constexpr
+        auto at(std::size_t i, std::size_t j) const -> decltype(auto) {
+            return Op::apply(expr_.at(i, j));
+        }
+        
+    private:
+        const E& expr_;
+    };
 
-	template <class E>
-	constexpr
-	auto operator+(const sceef::matrix_expression<E>& expr)
-		-> decltype(auto) {
-		return sceef::matrix_uop<sceef::op::positive, E>(expr());
-	}
+    template <class E>
+    constexpr
+    auto operator+(const sceef::matrix_expression<E>& expr)
+        -> decltype(auto) {
+        return sceef::matrix_uop<sceef::op::positive, E>(expr());
+    }
 
-	template <class E>
-	constexpr
-	auto operator-(const sceef::matrix_expression<E>& expr)
-		-> decltype(auto) {
-		return sceef::matrix_uop<sceef::op::negative, E>(expr());
-	}
-	
+    template <class E>
+    constexpr
+    auto operator-(const sceef::matrix_expression<E>& expr)
+        -> decltype(auto) {
+        return sceef::matrix_uop<sceef::op::negative, E>(expr());
+    }
+    
 } // namespace sceef
 
 #endif // SCEEF_MATRIX_UOP_HPP

@@ -13,10 +13,10 @@
 #include <sceef/vector_base_bop.hpp>
 
 namespace sceef {
-	
-	template <class LE, class Op, class RE>
-	using row_vector_bop = sceef::vector_base_bop<LE, Op, RE, sceef::row_vector_tag>;
-	
+    
+    template <class LE, class Op, class RE>
+    using row_vector_bop = sceef::vector_base_bop<LE, Op, RE, sceef::row_vector_tag>;
+    
 } // namespace sceef
 
 #endif // SCEEF_ROW_VECTOR_BOP_HPP

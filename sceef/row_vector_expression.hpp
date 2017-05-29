@@ -14,10 +14,10 @@
 
 namespace sceef {
 
-	template <class Derived>
-	using row_vector_expression =
-		sceef::vector_base_expression<Derived, sceef::row_vector_tag>;
-	
+    template <class Derived>
+    using row_vector_expression =
+        sceef::vector_base_expression<Derived, sceef::row_vector_tag>;
+    
 } // namespace sceef
 
 #endif // SCEEF_ROW_VECTOR_EXPRESSION_HPP

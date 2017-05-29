@@ -11,58 +11,58 @@
 
 namespace sceef {
 
-	namespace op {
+    namespace op {
 
-		struct add {
-			template <class T>
-			constexpr
-			static auto apply(T lhs, T rhs) -> decltype(auto) {
-				return lhs + rhs;
-			}
-		};
+        struct add {
+            template <class T>
+            constexpr
+            static auto apply(T lhs, T rhs) -> decltype(auto) {
+                return lhs + rhs;
+            }
+        };
 
-		struct subtract {
-			template <class T>
-			constexpr
-			static auto apply(T lhs, T rhs) -> decltype(auto) {
-				return lhs - rhs;
-			}
-		};
+        struct subtract {
+            template <class T>
+            constexpr
+            static auto apply(T lhs, T rhs) -> decltype(auto) {
+                return lhs - rhs;
+            }
+        };
 
-		struct multiply {
-			template <class T>
-			constexpr
-			static auto apply(T lhs, T rhs) -> decltype(auto) {
-				return lhs * rhs;
-			}
-		};
+        struct multiply {
+            template <class T>
+            constexpr
+            static auto apply(T lhs, T rhs) -> decltype(auto) {
+                return lhs * rhs;
+            }
+        };
 
-		struct divide {
-			template <class T>
-			constexpr
-			static auto apply(T lhs, T rhs) -> decltype(auto) {
-				return lhs / rhs;
-			}
-		};
-		
-		struct positive {
-			template <class T>
-			constexpr
-			static auto apply(T value) -> decltype(auto) {
-				return value;
-			}
-		};
+        struct divide {
+            template <class T>
+            constexpr
+            static auto apply(T lhs, T rhs) -> decltype(auto) {
+                return lhs / rhs;
+            }
+        };
+        
+        struct positive {
+            template <class T>
+            constexpr
+            static auto apply(T value) -> decltype(auto) {
+                return value;
+            }
+        };
 
-		struct negative {
-			template <class T>
-			constexpr
-			static auto apply(T value) -> decltype(auto) {
-				return -value;
-			}
-		};
-		
-	} // namespace op
-	
+        struct negative {
+            template <class T>
+            constexpr
+            static auto apply(T value) -> decltype(auto) {
+                return -value;
+            }
+        };
+        
+    } // namespace op
+    
 } // namespace sceef
 
 #endif // SCEEF_OP_HPP

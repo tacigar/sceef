@@ -11,8 +11,8 @@
 
 namespace sceef {
 
-	class row_vector_tag {};
-	
+    class row_vector_tag {};
+    
 } // namespace sceef
 
 #endif // SCEEF_ROW_VECTOR_TAG_HPP

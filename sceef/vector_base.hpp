@@ -17,112 +17,112 @@
 
 namespace sceef {
 
-	template <class T, std::size_t N, class Tag>
-	class vector_base
-		: public sceef::vector_base_expression<sceef::vector_base<T, N, Tag>, Tag> {
-	public:
-		static constexpr std::size_t SIZE = N;
+    template <class T, std::size_t N, class Tag>
+    class vector_base
+        : public sceef::vector_base_expression<sceef::vector_base<T, N, Tag>, Tag> {
+    public:
+        static constexpr std::size_t SIZE = N;
 
-		constexpr
-		vector_base(): elements_() {
-		}
+        constexpr
+        vector_base(): elements_() {
+        }
 
-		constexpr
-		vector_base(std::initializer_list<T> initlist): elements_() {
-			auto min_size = std::min(initlist.size(), N);
-			auto itr = initlist.begin();
+        constexpr
+        vector_base(std::initializer_list<T> initlist): elements_() {
+            auto min_size = std::min(initlist.size(), N);
+            auto itr = initlist.begin();
 
-			for (auto i = 0; i < min_size; ++i, ++itr) {
-				elements_[i] = *itr;
-			}
-		}
+            for (auto i = 0; i < min_size; ++i, ++itr) {
+                elements_[i] = *itr;
+            }
+        }
 
-		template <class E>
-		constexpr
-		vector_base(const sceef::vector_base_expression<E, Tag> &expr): elements_() {
-			for (auto i = 0; i < N; ++i) {
-				elements_[i] = expr[i];
-			}
-		}
+        template <class E>
+        constexpr
+        vector_base(const sceef::vector_base_expression<E, Tag> &expr): elements_() {
+            for (auto i = 0; i < N; ++i) {
+                elements_[i] = expr[i];
+            }
+        }
 
-		constexpr
-		auto size() const -> decltype(auto) {
-			return N;
-		}
+        constexpr
+        auto size() const -> decltype(auto) {
+            return N;
+        }
 
-		constexpr
-		auto operator[](std::size_t index) -> T& {
-			return elements_[index];
-		}
+        constexpr
+        auto operator[](std::size_t index) -> T& {
+            return elements_[index];
+        }
 
-		constexpr
-		auto operator[](std::size_t index) const -> const T& {
-			return elements_[index];
-		}
+        constexpr
+        auto operator[](std::size_t index) const -> const T& {
+            return elements_[index];
+        }
 
-		constexpr
-		auto at(std::size_t index) -> T& {
-			return elements_.at(index);
-		}
+        constexpr
+        auto at(std::size_t index) -> T& {
+            return elements_.at(index);
+        }
 
-		constexpr
-		auto at(std::size_t index) const -> const T& {
-			return elements_.at(index);
-		}
+        constexpr
+        auto at(std::size_t index) const -> const T& {
+            return elements_.at(index);
+        }
 
-		template <class E>
-		constexpr
-		auto operator=(const sceef::vector_base_expression<E, Tag>& expr)
-			-> decltype(auto) {
-			for (auto i = 0; i < N; ++i) {
-				elements_[i] = expr[i];
-			}
-			return *this;
-		}
+        template <class E>
+        constexpr
+        auto operator=(const sceef::vector_base_expression<E, Tag>& expr)
+            -> decltype(auto) {
+            for (auto i = 0; i < N; ++i) {
+                elements_[i] = expr[i];
+            }
+            return *this;
+        }
 
-		template <class E>
-		constexpr
-		auto operator+=(const sceef::vector_base_expression<E, Tag>& expr)
-			-> decltype(auto) {
-			for (auto i = 0; i < N; ++i) {
-				elements_[i] += expr[i];
-			}
-			return *this;
-		}
+        template <class E>
+        constexpr
+        auto operator+=(const sceef::vector_base_expression<E, Tag>& expr)
+            -> decltype(auto) {
+            for (auto i = 0; i < N; ++i) {
+                elements_[i] += expr[i];
+            }
+            return *this;
+        }
 
-		template <class E>
-		constexpr
-		auto operator-=(const sceef::vector_base_expression<E, Tag>& expr)
-			-> decltype(auto) {
-			for (auto i = 0; i < N; ++i) {
-				elements_[i] -= expr[i];
-			}
-			return *this;
-		}
+        template <class E>
+        constexpr
+        auto operator-=(const sceef::vector_base_expression<E, Tag>& expr)
+            -> decltype(auto) {
+            for (auto i = 0; i < N; ++i) {
+                elements_[i] -= expr[i];
+            }
+            return *this;
+        }
 
-		template <class U>
-		constexpr
-		auto operator*=(U value) -> decltype(auto) {
-			for (auto i = 0; i < N; ++i) {
-				elements_[i] *= value;
-			}
-			return *this;
-		}
+        template <class U>
+        constexpr
+        auto operator*=(U value) -> decltype(auto) {
+            for (auto i = 0; i < N; ++i) {
+                elements_[i] *= value;
+            }
+            return *this;
+        }
 
-		template <class U>
-		constexpr
-		auto operator/=(U value) -> decltype(auto) {
-			for (auto i = 0; i < N; ++i) {
-				elements_[i] /= value;
-			}
-			return *this;
-		}
-			
+        template <class U>
+        constexpr
+        auto operator/=(U value) -> decltype(auto) {
+            for (auto i = 0; i < N; ++i) {
+                elements_[i] /= value;
+            }
+            return *this;
+        }
+            
 
-	private:
-		std::array<T, N> elements_;
-	};
-	
+    private:
+        std::array<T, N> elements_;
+    };
+    
 } // namespace sceef
 
 #endif // SCEEF_VECTOR_BASE_HPP
