@@ -15,8 +15,15 @@ namespace sceef {
 	class vector_base_uop
 		: public sceef::vector_base_expression<sceef::vector_base_uop<Op, E, Tag>, Tag> {
 	public:
+		static constexpr std::size_t SIZE = E::SIZE;
+
 		constexpr
 		vector_base_uop(const E& expr): expr_(expr) {
+		}
+
+		constexpr
+		auto size() const -> std::size_t {
+			return SIZE;
 		}
 
 		constexpr

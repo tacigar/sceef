@@ -17,6 +17,21 @@ namespace sceef {
 	class matrix_expression {
 	public:
 		constexpr
+		auto size() const -> decltype(auto) {
+			return (static_cast<Derived&>(*this)).size();
+		}
+
+		constexpr
+		auto column_size() const -> std::size_t {
+			return (static_cast<Derived&>(*this)).column_size();
+		}
+
+		constexpr
+		auto row_size() const -> std::size_t {
+			return (static_cast<Derived&>(*this)).row_size();
+		}
+
+		constexpr
 		auto operator[](std::size_t index) -> decltype(auto) {
 			return (static_cast<Derived&>(*this)).operator[](index);
 		}

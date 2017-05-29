@@ -19,9 +19,17 @@ namespace sceef {
 	class vector_base_bop
 		: public sceef::vector_base_expression<sceef::vector_base_bop<LE, Op, RE, Tag>, Tag> {
 	public:
+		static_assert(LE::SIZE == RE::SIZE, "left hand's size != right hand's size.");
+		static constexpr std::size_t SIZE = LE::SIZE;
+
 		constexpr
 		vector_base_bop(const LE& lhs, const RE& rhs)
 			: lhs_(lhs), rhs_(rhs) {
+		}
+
+		constexpr
+		auto size() const -> std::size_t {
+			return SIZE;
 		}
 
 		constexpr

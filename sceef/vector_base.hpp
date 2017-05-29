@@ -21,6 +21,8 @@ namespace sceef {
 	class vector_base
 		: public sceef::vector_base_expression<sceef::vector_base<T, N, Tag>, Tag> {
 	public:
+		static constexpr std::size_t SIZE = N;
+
 		constexpr
 		vector_base(): elements_() {
 		}
@@ -44,10 +46,10 @@ namespace sceef {
 		}
 
 		constexpr
-		auto size() -> decltype(auto) {
+		auto size() const -> decltype(auto) {
 			return N;
 		}
-		
+
 		constexpr
 		auto operator[](std::size_t index) -> T& {
 			return elements_[index];

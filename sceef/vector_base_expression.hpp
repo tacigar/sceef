@@ -17,6 +17,11 @@ namespace sceef {
 	class vector_base_expression {
 	public:
 		constexpr
+		auto size() const -> decltype(auto) {
+			return (static_cast<Derived&>(*this)).size();
+		}
+
+		constexpr
 		auto operator[](std::size_t index) -> decltype(auto) {
 			return (static_cast<Derived&>(*this)).operator[](index);
 		}
