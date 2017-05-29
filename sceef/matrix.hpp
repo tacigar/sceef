@@ -21,6 +21,10 @@ namespace sceef {
 	class matrix
 		: public sceef::matrix_expression<sceef::matrix<T, N, M>> {
 	public:
+		static constexpr std::size_t SIZE = N;
+		static constexpr std::size_t COLUMN_SIZE = N;
+		static constexpr std::size_t ROW_SIZE = M;
+
 		constexpr
 		matrix(): elements_() {
 		}

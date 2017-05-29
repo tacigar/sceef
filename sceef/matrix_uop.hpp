@@ -20,8 +20,27 @@ namespace sceef {
 	class matrix_uop
 		: public sceef::matrix_expression<sceef::matrix_uop<Op, E>> {
 	public:
+		static constexpr std::size_t SIZE = E::SIZE;
+		static constexpr std::size_t COLUMN_SIZE = E::COLUMN_SIZE;
+		static constexpr std::size_t ROW_SIZE = E::ROW_SIZE;
+
 		constexpr
 		matrix_uop(const E& expr): expr_(expr) {
+		}
+
+		constexpr
+		auto size() const -> std::size_t {
+			return SIZE;
+		}
+
+		constexpr
+		auto column_size() const -> std::size_t {
+			return COLUMN_SIZE;
+		}
+
+		constexpr
+		auto row_size() const -> std::size_t {
+			return ROW_SIZE;
 		}
 
 		constexpr
