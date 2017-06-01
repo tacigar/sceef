@@ -25,6 +25,9 @@ namespace sceef {
     constexpr
     inline auto prod(const sceef::vector_base_expression<LE, LT>& lhs,
                      const sceef::vector_base_expression<RE, RT>& rhs) -> decltype(auto) {
+        static_assert(!(std::is_same<LT, sceef::vector_tag>::value &&
+                        std::is_same<RT, sceef::row_vector_tag>::value),
+                      "prod function for a vector and row vector is not defined.");
         static_assert(LE::SIZE == RE::SIZE, "left hand's size != right hand's size.");
         
         decltype(lhs[0] * rhs[0]) sum = 0;
