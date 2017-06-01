@@ -94,3 +94,90 @@ TEST(test_vector, add) {
     }
 }
 
+TEST(test_vector, prod_vector_vector) {
+    struct test_case {
+        std::pair<sceef::vector<int, 3>, sceef::vector<int, 3>> input;
+        int output;
+    };
+
+    std::vector<test_case> tests = {
+        {{{1, 1, 1}, {1, 1, 1}}, 3},
+        {{{1, 2, 3}, {1, 2, 3}}, 14},
+        {{{-1, -1, -1}, {1, 1, 1}}, -3},
+        {{{0, 0, 0}, {1, 1, 1}}, 0},
+    };
+
+    for (auto i = 0; i < tests.size(); ++i) {
+        auto test = tests[i];
+        ASSERT_EQ(test.output, sceef::prod(test.input.first, test.input.second))
+            << "i = " << i;
+        ASSERT_EQ(test.output, sceef::prod(test.input.second, test.input.first))
+            << "i = " << i;
+    }
+}
+
+TEST(test_vector, prod_vector_row_vector) {
+    struct test_case {
+        std::pair<sceef::row_vector<int, 3>, sceef::vector<int, 3>> input;
+        int output;
+    };
+
+    std::vector<test_case> tests = {
+        {{{1, 1, 1}, {1, 1, 1}}, 3},
+        {{{1, 2, 3}, {1, 2, 3}}, 14},
+        {{{-1, -1, -1}, {1, 1, 1}}, -3},
+        {{{0, 0, 0}, {1, 1, 1}}, 0},
+    };
+
+    for (auto i = 0; i < tests.size(); ++i) {
+        auto test = tests[i];
+        ASSERT_EQ(test.output, sceef::prod(test.input.first, test.input.second))
+            << "i = " << i;
+    }
+}
+
+TEST(test_vector, prod_row_vector_row_vector) {
+    struct test_case {
+        std::pair<sceef::row_vector<int, 3>, sceef::row_vector<int, 3>> input;
+        int output;
+    };
+
+    std::vector<test_case> tests = {
+        {{{1, 1, 1}, {1, 1, 1}}, 3},
+        {{{1, 2, 3}, {1, 2, 3}}, 14},
+        {{{-1, -1, -1}, {1, 1, 1}}, -3},
+        {{{0, 0, 0}, {1, 1, 1}}, 0},
+    };
+    
+    for (auto i = 0; i < tests.size(); ++i) {
+        auto test = tests[i];
+        ASSERT_EQ(test.output, sceef::prod(test.input.first, test.input.second))
+            << "i = " << i;
+        ASSERT_EQ(test.output, sceef::prod(test.input.second, test.input.first))
+            << "i = " << i;
+    }
+}
+
+/* // This pattern is not defined.
+TEST(test_vector, prod_vector_row_vector) {
+    struct test_case {
+        std::pair<sceef::vector<int, 3>, sceef::row_vector<int, 3>> input;
+        int output;
+    };
+
+    std::vector<test_case> tests = {
+        {{{1, 1, 1}, {1, 1, 1}}, 3},
+        {{{1, 2, 3}, {1, 2, 3}}, 14},
+        {{{-1, -1, -1}, {1, 1, 1}}, -3},
+        {{{0, 0, 0}, {1, 1, 1}}, 0},
+    };
+    
+    for (auto i = 0; i < tests.size(); ++i) {
+        auto test = tests[i];
+        ASSERT_EQ(test.output, sceef::prod(test.input.first, test.input.second))
+            << "i = " << i;
+        ASSERT_EQ(test.output, sceef::prod(test.input.second, test.input.first))
+            << "i = " << i;
+    }
+}
+*/
